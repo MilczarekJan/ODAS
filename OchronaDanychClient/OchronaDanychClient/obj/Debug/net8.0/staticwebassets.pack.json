@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClient\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\OchronaDanychClient.bundle.scp.css",
+      "PackagePath": "staticwebassets\\OchronaDanychClient.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClient\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClient\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClient\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClient\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.OchronaDanychClient.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.OchronaDanychClient.props",
+      "PackagePath": "build\\OchronaDanychClient.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.OchronaDanychClient.props",
+      "PackagePath": "buildMultiTargeting\\OchronaDanychClient.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.OchronaDanychClient.props",
+      "PackagePath": "buildTransitive\\OchronaDanychClient.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

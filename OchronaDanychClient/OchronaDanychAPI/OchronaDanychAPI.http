@@ -1,0 +1,11 @@
+@OchronaDanychAPI_HostAddress = http://localhost:5063
+
+GET {{OchronaDanychAPI_HostAddress}}/todos/
+Accept: application/json
+
+###
+
+GET {{OchronaDanychAPI_HostAddress}}/todos/1
+Accept: application/json
+
+###

@@ -1,0 +1,24 @@
+﻿@page "/"
+
+<PageTitle>BankBankowski S.A</PageTitle>
+
+<h1>Logowanie</h1>
+
+<EditForm OnValidSubmit="HandleLogin">
+
+    <p>Password:</p>
+    <InputText @bind-Value="char_1" type="password" id="password_1" maxlength="1"></InputText>
+
+    <button type="submit">Login In</button>
+
+</EditForm>
+
+@code {
+    private string message = string.Empty;
+    private string char_1;
+
+    private async Task HandleLogin() // async Task
+    {
+        
+    }
+}
