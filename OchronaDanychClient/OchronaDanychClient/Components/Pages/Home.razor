@@ -1,13 +1,27 @@
 ﻿@page "/"
+@using OchronaDanychShared.Auth
 
 <PageTitle>BankBankowski S.A</PageTitle>
 
 <h1>Logowanie</h1>
 
-<EditForm OnValidSubmit="HandleLogin">
+<EditForm Model="userLoginDTO" OnValidSubmit="HandleLogin">
+
+    <p>Email:</p>
+    <InputText @bind-Value="mail" id="email"></InputText>
 
     <p>Password:</p>
-    <InputText @bind-Value="char_1" type="password" id="password_1" maxlength="1"></InputText>
+    <div style="display: flex; gap: 5px;">
+        <InputText @bind-Value="char_1" type="password" id="password_1" maxlength="1" style="width: 25px; height: 25px;"></InputText>
+        <InputText @bind-Value="char_2" type="password" id="password_2" maxlength="1" style="width: 25px; height: 25px;"></InputText>
+        <InputText @bind-Value="char_3" type="password" id="password_3" maxlength="1" style="width: 25px; height: 25px;"></InputText>
+        <InputText @bind-Value="char_4" type="password" id="password_4" maxlength="1" style="width: 25px; height: 25px;"></InputText>
+        <InputText @bind-Value="char_5" type="password" id="password_5" maxlength="1" style="width: 25px; height: 25px;"></InputText>
+        <InputText @bind-Value="char_6" type="password" id="password_6" maxlength="1" style="width: 25px; height: 25px;"></InputText>
+        <InputText @bind-Value="char_7" type="password" id="password_7" maxlength="1" style="width: 25px; height: 25px;"></InputText>
+        <InputText @bind-Value="char_8" type="password" id="password_8" maxlength="1" style="width: 25px; height: 25px;"></InputText>
+    </div>
+
 
     <button type="submit">Login In</button>
 
@@ -15,7 +29,16 @@
 
 @code {
     private string message = string.Empty;
+    private UserLoginDTO userLoginDTO = new UserLoginDTO();
     private string char_1;
+    private string char_2;
+    private string char_3;
+    private string char_4;
+    private string char_5;
+    private string char_6;
+    private string char_7;
+    private string char_8;
+    private string mail;
 
     private async Task HandleLogin() // async Task
     {

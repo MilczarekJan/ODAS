@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using OchronaDanychShared;
 using OchronaDanychShared.Models;
+using OchronaDanychAPI.Services.TransferService;
 
 namespace OchronaDanychAPI.Controllers
 {
@@ -11,24 +12,22 @@ namespace OchronaDanychAPI.Controllers
 
     public class TransferController : Controller
     {
-        private readonly IShoeService _shoeService; //shoeservice, bêdzie o odpowiedziach dotycz¹cych butów
+        private readonly ITransferService _transferService; //shoeservice, bêdzie o odpowiedziach dotycz¹cych butów
         private readonly IConfiguration _configuration;
-        private readonly ILogger<ShoeController> _logger;
-        private readonly IValidateShoeService _validateShoeService;
+        private readonly ILogger<TransferController> _logger;
 
-        public TransferController(IShoeService shoeService, IConfiguration configuration, ILogger<ShoeController> logger, IValidateShoeService validateShoeService)
+        public TransferController(ITransferService transferService, IConfiguration configuration, ILogger<TransferController> logger)
         {
-            _shoeService = shoeService;
+            _transferService = transferService;
             _configuration = configuration;
             _logger = logger;
-            _validateShoeService = validateShoeService;
         }
 
         [HttpGet, Authorize]//, Authorize
         public async Task<ActionResult<ServiceResponse<List<BankTransfer>>>> GetBankTransfers()
         {
 
-            var result = await _shoeService.GetTransfersAsync();
+            var result = await _transferService.GetTransfersAsync();
 
             if (result.Success)
                 return Ok(result);

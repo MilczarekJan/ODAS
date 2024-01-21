@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using OchronaDanychShared;
 using OchronaDanychShared.Auth;
-using OchronaDanychShared.Services.AuthService;
+using OchronaDanychAPI.Services.AuthService;
 
 namespace OchronaDanychAPI.Controllers
 {

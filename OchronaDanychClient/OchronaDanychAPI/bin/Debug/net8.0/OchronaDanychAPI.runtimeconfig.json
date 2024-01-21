@@ -19,6 +19,7 @@
       "System.GC.DynamicAdaptationMode": 1,
       "System.Globalization.Invariant": true,
       "System.Globalization.PredefinedCulturesOnly": true,
+      "System.Reflection.NullabilityInfoContext.IsSupported": true,
       "System.Resources.ResourceManager.AllowCustomResourceTypes": false,
       "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported": false,
       "System.Runtime.InteropServices.BuiltInComInterop.IsSupported": false,
@@ -28,7 +29,7 @@
       "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": false,
       "System.StartupHookProvider.IsSupported": false,
       "System.Text.Encoding.EnableUnsafeUTF7Encoding": false,
-      "System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault": false,
+      "System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault": true,
       "System.Threading.Thread.EnableAutoreleasePool": false,
       "System.Linq.Expressions.CanEmitObjectArrayDelegate": false
     }

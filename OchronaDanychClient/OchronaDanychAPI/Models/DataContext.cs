@@ -18,29 +18,28 @@ namespace OchronaDanychAPI.Models
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // fluent api 
-            modelBuilder.Entity<Shoe>().HasKey(p => p.Id);
+            modelBuilder.Entity<BankTransfer>().HasKey(p => p.Id);
 
-            modelBuilder.Entity<Shoe>()
+            modelBuilder.Entity<BankTransfer>()
                 .Property(p => p.Id)
                 .IsRequired()
                 .ValueGeneratedOnAdd();
 
-            modelBuilder.Entity<Shoe>()
-                .Property(p => p.ShoeSize)
-                .IsRequired();
+            modelBuilder.Entity<BankTransfer>()
+                .Property(p => p.Amount)
+                .IsRequired()
+                .HasPrecision(2);
 
-            modelBuilder.Entity<Shoe>()
-             .Property(p => p.Description)
+            modelBuilder.Entity<BankTransfer>()
+             .Property(p => p.Title)
+             .IsRequired()
              .HasMaxLength(200);
 
-            modelBuilder.Entity<Shoe>()
-            .Property(p => p.Name)
-            .HasMaxLength(100);
+            modelBuilder.Entity<BankTransfer>()
+            .Property(p => p.Sender_Id)
+            .IsRequired();
 
-
-            // data seed 
-
-            modelBuilder.Entity<Shoe>().HasData(ShoeSeeder.GenerateShoeData());
+            modelBuilder.Entity<BankTransfer>().HasData(BankTransferSeeder.GenerateTransferData());
         }
     }
 }

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "JDa8oswDVyo+4FT1lLzfQTik8CvL6SPOeNbbhE84fZ2/lAQgf2wya7fhxI7jHN9Zs7VEf1E8JYKCR6gPXEwPiQ==",
+  "dgSpecHash": "5hX2FABU15cWNWDCvnSpPHN/Vqq8LMsZJdPVqRC8H2G7iHHeggo0ecVYc7A/4CLCFy1rCidVOopqUKL+SSvLJw==",
   "success": true,
   "projectFilePath": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychShared\\OchronaDanychShared.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\milcz\\.nuget\\packages\\bogus\\35.4.0\\bogus.35.4.0.nupkg.sha512",
     "C:\\Users\\milcz\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.1\\microsoft.entityframeworkcore.8.0.1.nupkg.sha512",
     "C:\\Users\\milcz\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.1\\microsoft.entityframeworkcore.abstractions.8.0.1.nupkg.sha512",
     "C:\\Users\\milcz\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.1\\microsoft.entityframeworkcore.analyzers.8.0.1.nupkg.sha512",

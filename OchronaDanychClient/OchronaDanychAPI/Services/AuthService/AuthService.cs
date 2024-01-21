@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Text;
 using OchronaDanychShared;
 using OchronaDanychShared.Auth;
+using OchronaDanychAPI.Models;
 
 namespace OchronaDanychAPI.Services.AuthService
 {
@@ -44,7 +45,7 @@ namespace OchronaDanychAPI.Services.AuthService
             };
         }
 
-        public async Task<ServiceResponse<string>> Login(string email, string password)
+        public async Task<ServiceResponse<string>> Login(string email, PasswordPair[] password)
         {
             var response = new ServiceResponse<string>();
 
@@ -54,7 +55,7 @@ namespace OchronaDanychAPI.Services.AuthService
                 response.Success = false;
                 response.Message = "User not found.";
             }
-            else if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            else if (!VerifyPasswordHash(password, user.LettersHash, user.LettersSalt))
             {
                 response.Success = false;
                 response.Message = "Incorrect password.";
@@ -70,13 +71,17 @@ namespace OchronaDanychAPI.Services.AuthService
             return response;
         }
 
-        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        private bool VerifyPasswordHash(PasswordPair[] password, byte[][] passwordHash, byte[][] passwordSalt)
         {
-            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+            foreach( var pair in password)
             {
-                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                return computedHash.SequenceEqual(passwordHash);
+                var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt[pair.Order]);
+                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(pair.Letter.ToString()));
+                if (!computedHash.SequenceEqual(passwordHash[pair.Order])) { 
+                    return false;
+                }
             }
+            return true;
         }
 
         private string CreateToken(User user)
@@ -84,9 +89,8 @@ namespace OchronaDanychAPI.Services.AuthService
             List<Claim> claims = new List<Claim>()
              {
                  new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                 new Claim(ClaimTypes.Name, user.Email),
-                 new Claim(ClaimTypes.Role, user.Role),
-                 new Claim("DateCreated", user.DateCreated.ToString()),
+                 new Claim(ClaimTypes.Name, user.Username),
+                 new Claim(ClaimTypes.Email, user.Email),
              };
 
             SymmetricSecurityKey key =
@@ -134,7 +138,7 @@ namespace OchronaDanychAPI.Services.AuthService
         public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             // using statement to dispose of IDisposable objects
-            using (var hmac = new System.Security.Cryptography.HMACSHA512())
+            using (var hmac = new System.Security.Cryptography.HMACSHA512()) // using (var hmac = new System.Security.Cryptography.HMACSHA512())
             {
                 // generate random salt
                 passwordSalt = hmac.Key;
