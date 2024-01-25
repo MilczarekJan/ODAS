@@ -14,6 +14,7 @@ namespace OchronaDanychShared.Models
                 .RuleFor(x => x.Title, x => x.Random.Words(4))
                 .RuleFor(x => x.Recipient_Name, x => x.Name.FullName())
                 .RuleFor(x => x.Recipient_Email, x => x.Internet.Email())
+                .RuleFor(x => x.Sender_Email, x => x.Internet.Email())
                 .RuleFor(x => x.Id, x => transferId++);
 
             return transferFaker.Generate(10).ToList();

@@ -13,5 +13,9 @@ namespace OchronaDanychShared.Auth
         public string Email { get; set; }
         [Required]
         public PasswordPair[] Password { get; set; }
+
+        public UserLoginDTO(PasswordPair[] password) { 
+            this.Password = password;
+        }
     }
 }

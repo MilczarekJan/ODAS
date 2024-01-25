@@ -12,6 +12,7 @@ namespace OchronaDanychShared.Models
         public double Amount { get; set; }
         public string Title { get; set; }
         public int Sender_Id { get; set; }
+        public string Sender_Email { get; set; }
         public int Recipient_Id { get; set; }
         public string Recipient_Name { get; set; }
         public string Recipient_Email { get; set; }

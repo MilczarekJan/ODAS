@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "9tJO1ik2chKaCs8fgdlW9G+TB9qrGpR4eFOJ8pKAbNkZm729lc/zlkSvM02oVEQfeTke/7mOZpo/V75et26qXQ==",
+  "dgSpecHash": "Xs+uX9vB5R6D9W/Vu8Hu/JZ4U2Hv+71AzaFjA61LAFsqRKGNSqbJeuSpjrC8ogMa2UubBLQAVXaNzavk+sXZjQ==",
   "success": true,
   "projectFilePath": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClient\\OchronaDanychClient.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\milcz\\.nuget\\packages\\blazored.localstorage\\4.4.0\\blazored.localstorage.4.4.0.nupkg.sha512",
     "C:\\Users\\milcz\\.nuget\\packages\\bogus\\35.4.0\\bogus.35.4.0.nupkg.sha512",
     "C:\\Users\\milcz\\.nuget\\packages\\microsoft.aspnetcore.authorization\\8.0.1\\microsoft.aspnetcore.authorization.8.0.1.nupkg.sha512",
     "C:\\Users\\milcz\\.nuget\\packages\\microsoft.aspnetcore.components\\8.0.1\\microsoft.aspnetcore.components.8.0.1.nupkg.sha512",

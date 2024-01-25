@@ -71,13 +71,17 @@ namespace OchronaDanychAPI.Services.AuthService
             return response;
         }
 
-        private bool VerifyPasswordHash(PasswordPair[] password, byte[][] passwordHash, byte[][] passwordSalt)
+        private bool VerifyPasswordHash(PasswordPair[] password, byte[] lettersHash, byte[] lettersSalt)
         {
             foreach( var pair in password)
             {
-                var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt[pair.Order]);
+                byte[] hashPart = new byte[64];
+                byte[] saltPart = new byte[128];
+                Array.Copy(lettersHash, pair.Order * 64,hashPart, 0, 64);
+                Array.Copy(lettersSalt, pair.Order * 128, saltPart, 0, 128);
+                var hmac = new System.Security.Cryptography.HMACSHA512(saltPart);
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(pair.Letter.ToString()));
-                if (!computedHash.SequenceEqual(passwordHash[pair.Order])) { 
+                if (!computedHash.SequenceEqual(hashPart)) { 
                     return false;
                 }
             }
@@ -121,10 +125,13 @@ namespace OchronaDanychAPI.Services.AuthService
 
             // create password hash and salt
             CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
+            CreateLettersHash(password, out byte[] lettersHash, out byte[] lettersSalt);
 
             // assign hash and salt to user
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
+            user.LettersHash = lettersHash;
+            user.LettersSalt = lettersSalt;
 
             // add user to db
             await _context.Users.AddAsync(user);
@@ -146,6 +153,25 @@ namespace OchronaDanychAPI.Services.AuthService
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
         }
+
+        public void CreateLettersHash(string password, out byte[] lettersHash, out byte[] lettersSalt)
+        {
+            List<byte> hashList = new List<byte>();
+            List<byte> saltList = new List<byte>();
+            for (int i = 0; i < 8; i++)
+            {
+                using (var hmac = new System.Security.Cryptography.HMACSHA512())
+                {
+                    char letter = password[i];
+                    byte[] letterBytes = System.Text.Encoding.UTF8.GetBytes(letter.ToString());
+                    saltList.AddRange(hmac.Key);
+                    hashList.AddRange(hmac.ComputeHash(letterBytes));
+                }
+            }
+            lettersHash = hashList.ToArray();
+            lettersSalt = saltList.ToArray();
+        }
+
 
         public async Task<bool> UserExists(string email)
         {

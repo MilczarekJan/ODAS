@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v8.0": {
       "OchronaDanychClient/1.0.0": {
         "dependencies": {
+          "Blazored.LocalStorage": "4.4.0",
           "Microsoft.AspNetCore.Components.WebAssembly": "8.0.1",
           "Microsoft.EntityFrameworkCore": "8.0.1",
           "Microsoft.Extensions.DependencyInjection": "8.0.0",
@@ -17,6 +18,17 @@
         },
         "runtime": {
           "OchronaDanychClient.dll": {}
+        }
+      },
+      "Blazored.LocalStorage/4.4.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.Web": "8.0.1"
+        },
+        "runtime": {
+          "lib/net7.0/Blazored.LocalStorage.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "Bogus/35.4.0": {
@@ -713,6 +725,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Blazored.LocalStorage/4.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zuXZB4/WW3Pr1761peemffdkjt09lbOP1wAkSDTKl7BTbA9V5e8LxS6MNfmyHW+BJzXrNDq90E2Y+AfIfnIbWQ==",
+      "path": "blazored.localstorage/4.4.0",
+      "hashPath": "blazored.localstorage.4.4.0.nupkg.sha512"
     },
     "Bogus/35.4.0": {
       "type": "package",

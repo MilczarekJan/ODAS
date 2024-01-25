@@ -1,5 +1,8 @@
 using OchronaDanychClient.Components;
 using Microsoft.EntityFrameworkCore;
+using Blazored.LocalStorage;
+using OchronaDanychShared.Services;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +10,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+var uriBuilder = new UriBuilder("http://localhost:5093") //appSettingsSection.BaseAPIUrl
+{
+    //Path = appSettingsSection.BaseAPIUrl
+};
 
+builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddAuthorizationCore();
+builder.Services.AddHttpClient<IAuthService, AuthService>(client => client.BaseAddress = uriBuilder.Uri);
 builder.Services.AddScoped<Random>();
 
 var app = builder.Build();

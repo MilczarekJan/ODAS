@@ -1,0 +1,54 @@
+﻿@page "/MainPage"
+@using Blazored.LocalStorage;
+@using System.Security.Claims;
+@using Microsoft.AspNetCore.Components.Authorization;
+@inherits LayoutComponentBase
+
+@inject ILocalStorageService LocalStorageService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+
+            <AuthorizeView>
+                <Authorized>
+
+                    <div>
+                        @context.User.Identity.Name |
+                        @context.User.Claims.Where(c => c.Type == ClaimTypes.Email).FirstOrDefault().Value
+                    </div>
+
+                    <a href="#" @onclick="Logout">Logout</a>
+                </Authorized>
+                <NotAuthorized>
+                    <a href="/register">Register</a>
+                    <a href="/login">Login</a>
+                </NotAuthorized>
+            </AuthorizeView>
+
+
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+
+@code {
+
+
+    private async Task Logout()
+    {
+        await LocalStorageService.RemoveItemAsync("authToken");
+        await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        NavigationManager.NavigateTo("/login");
+    }
+}

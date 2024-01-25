@@ -10,5 +10,10 @@ namespace OchronaDanychShared.Auth
     {
         public char Letter {  get; set; } //litera hasla
         public int Order { get; set; } //kolejnosc litery w hasle
+
+        public PasswordPair(char letter, int order) {
+            this.Letter = letter;
+            this.Order = order;
+        }
     }
 }

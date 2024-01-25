@@ -50,3 +50,4 @@ C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychClient\bin\Deb
 C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychClient\bin\Debug\net8.0\OchronaDanychShared.dll
 C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychClient\bin\Debug\net8.0\OchronaDanychShared.pdb
 C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychClient\bin\Debug\net8.0\Bogus.dll
+C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychClient\bin\Debug\net8.0\Blazored.LocalStorage.dll

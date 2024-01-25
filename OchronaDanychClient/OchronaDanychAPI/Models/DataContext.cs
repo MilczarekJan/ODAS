@@ -39,6 +39,22 @@ namespace OchronaDanychAPI.Models
             .Property(p => p.Sender_Id)
             .IsRequired();
 
+            modelBuilder.Entity<BankTransfer>()
+            .Property(p => p.Sender_Email)
+            .IsRequired();
+
+            modelBuilder.Entity<BankTransfer>()
+            .Property(p => p.Recipient_Id)
+            .IsRequired();
+
+            modelBuilder.Entity<BankTransfer>()
+            .Property(p => p.Recipient_Name)
+            .IsRequired();
+
+            modelBuilder.Entity<BankTransfer>()
+            .Property(p => p.Recipient_Email)
+            .IsRequired();
+
             modelBuilder.Entity<BankTransfer>().HasData(BankTransferSeeder.GenerateTransferData());
         }
     }

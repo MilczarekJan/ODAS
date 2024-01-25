@@ -23,7 +23,7 @@ namespace OchronaDanychAPI.Controllers
             _logger = logger;
         }
 
-        [HttpGet, Authorize]//, Authorize
+        [HttpGet]//, Authorize
         public async Task<ActionResult<ServiceResponse<List<BankTransfer>>>> GetBankTransfers()
         {
 

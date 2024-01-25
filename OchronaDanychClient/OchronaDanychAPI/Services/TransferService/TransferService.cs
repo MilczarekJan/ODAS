@@ -8,6 +8,11 @@ namespace OchronaDanychAPI.Services.TransferService
     public class TransferService : ITransferService
     {
         private readonly DataContext _dataContext;
+
+        public TransferService(DataContext dataContext)
+        {
+            _dataContext = dataContext;
+        }
         public async Task<ServiceResponse<List<BankTransfer>>> GetTransfersAsync()
         {
             var transfers = await _dataContext.BankTransfers.ToListAsync();
