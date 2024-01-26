@@ -1,0 +1,62 @@
+﻿@page "/login"
+@using OchronaDanychShared.Auth
+@using OchronaDanychShared.Services;
+@using Blazored.LocalStorage;
+@using Microsoft.AspNetCore.Components.Authorization;
+@inject IAuthService AuthService;
+@inject ILocalStorageService LocalStorageService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+
+<PageTitle>BankBankowski S.A</PageTitle>
+
+<h1>Logowanie</h1>
+
+<p>Email:</p>
+<InputText @bind-Value="mail" id="email"></InputText>
+
+<p>Password:</p>
+<div style="display: flex; gap: 5px;">
+    <InputText @bind-Value="char_0" type="password" id="password_1" maxlength="1" style="width: 25px; height: 25px;"></InputText>
+    <InputText @bind-Value="char_1" type="password" id="password_2" maxlength="1" style="width: 25px; height: 25px;"></InputText>
+    <InputText @bind-Value="char_2" type="password" id="password_3" maxlength="1" style="width: 25px; height: 25px;"></InputText>
+    <InputText @bind-Value="char_3" type="password" id="password_4" maxlength="1" style="width: 25px; height: 25px;"></InputText>
+    <InputText @bind-Value="char_4" type="password" id="password_5" maxlength="1" style="width: 25px; height: 25px;"></InputText>
+</div>
+
+<button class="btn btn-primary" @onclick="HandleLogin">Log in</button>
+
+@code {
+    private string message = string.Empty;
+    private string char_0;
+    private string char_1;
+    private string char_2;
+    private string char_3;
+    private string char_4;
+    private string mail;
+    private UserLoginDTO userLoginDTO = new UserLoginDTO(new PasswordPair[5]);
+
+    private async Task HandleLogin()
+    {
+        PasswordPair p0 = new PasswordPair(char_0[0], 0);
+        PasswordPair p1 = new PasswordPair(char_1[0], 1);
+        PasswordPair p2 = new PasswordPair(char_2[0], 2);
+        PasswordPair p3 = new PasswordPair(char_3[0], 3);
+        PasswordPair p4 = new PasswordPair(char_4[0], 4);
+        PasswordPair[] pairArray = { p0, p1, p2, p3, p4 };
+        userLoginDTO = new UserLoginDTO(pairArray);
+        userLoginDTO.Email = mail;
+        var result = await AuthService.Login(userLoginDTO);
+        if (result.Success)
+        {
+            await LocalStorageService.SetItemAsync("authToken", result.Data);
+            await AuthenticationStateProvider.GetAuthenticationStateAsync();
+
+            NavigationManager.NavigateTo("/");
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/counter");
+        }
+    }
+}

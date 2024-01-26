@@ -140,3 +140,9 @@ C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychAPI\bin\Debug\
 C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychAPI\bin\Debug\net8.0\OchronaDanychShared.dll
 C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychAPI\bin\Debug\net8.0\OchronaDanychShared.pdb
 C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychAPI\obj\Debug\net8.0\OchronaDanychAPI.csproj.CopyComplete
+C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychAPI\bin\Debug\net8.0\Blazored.LocalStorage.dll
+C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Authorization.dll
+C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Components.dll
+C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Components.Authorization.dll
+C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Metadata.dll
+C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychAPI\bin\Debug\net8.0\Microsoft.Extensions.Options.dll

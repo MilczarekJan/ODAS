@@ -1,0 +1,61 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClientWA\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClientWA\\obj\\Debug\\net8.0\\compressed\\rydyzxexe3.gz",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClientWA\\obj\\Debug\\net8.0\\scopedcss\\bundle\\OchronaDanychClientWA.styles.css",
+      "PackagePath": "staticwebassets\\OchronaDanychClientWA.styles.css"
+    },
+    {
+      "Id": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClientWA\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClientWA\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClientWA\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClientWA\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClientWA\\wwwroot\\icon-192.png",
+      "PackagePath": "staticwebassets\\icon-192.png"
+    },
+    {
+      "Id": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClientWA\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClientWA\\wwwroot\\sample-data\\weather.json",
+      "PackagePath": "staticwebassets\\sample-data\\weather.json"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.OchronaDanychClientWA.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.OchronaDanychClientWA.props",
+      "PackagePath": "build\\OchronaDanychClientWA.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.OchronaDanychClientWA.props",
+      "PackagePath": "buildMultiTargeting\\OchronaDanychClientWA.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.OchronaDanychClientWA.props",
+      "PackagePath": "buildTransitive\\OchronaDanychClientWA.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

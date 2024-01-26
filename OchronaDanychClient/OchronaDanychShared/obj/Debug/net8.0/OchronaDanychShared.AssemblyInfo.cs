@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OchronaDanychShared")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f35682b8c249c47148fc39696704cb2e4904a018")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+56c5b51f2d9ee6fb73b1458974f0104336207e8a")]
 [assembly: System.Reflection.AssemblyProductAttribute("OchronaDanychShared")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OchronaDanychShared")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

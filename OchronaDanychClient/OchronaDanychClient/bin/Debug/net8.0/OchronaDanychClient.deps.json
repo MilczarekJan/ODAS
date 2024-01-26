@@ -65,6 +65,18 @@
         }
       },
       "Microsoft.AspNetCore.Components.Analyzers/8.0.1": {},
+      "Microsoft.AspNetCore.Components.Authorization/8.0.1": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Authorization": "8.0.1",
+          "Microsoft.AspNetCore.Components": "8.0.1"
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.AspNetCore.Components.Authorization.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.123.58008"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Components.Forms/8.0.1": {
         "dependencies": {
           "Microsoft.AspNetCore.Components": "8.0.1"
@@ -709,7 +721,9 @@
       },
       "OchronaDanychShared/1.0.0": {
         "dependencies": {
+          "Blazored.LocalStorage": "4.4.0",
           "Bogus": "35.4.0",
+          "Microsoft.AspNetCore.Components.Authorization": "8.0.1",
           "Microsoft.EntityFrameworkCore": "8.0.1",
           "Microsoft.IdentityModel.Tokens": "7.2.0",
           "System.IdentityModel.Tokens.Jwt": "7.2.0"
@@ -760,6 +774,13 @@
       "sha512": "sha512-8+Cv84+XYd/xKaAPAZvJBg9ZKxpH7sszs5MjsGOw3inmDa3MOlGHBkSbki2AzMuK0kpj9vu9mWhcJf7/6Jd8qQ==",
       "path": "microsoft.aspnetcore.components.analyzers/8.0.1",
       "hashPath": "microsoft.aspnetcore.components.analyzers.8.0.1.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Components.Authorization/8.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gZqJwffpPrXDkR0fLDuu18dyfI1dCPmukG42SxaD3yAuNpY/aof2tnIge0E5oSR9uBdc480KIe7JI63gnk/bpg==",
+      "path": "microsoft.aspnetcore.components.authorization/8.0.1",
+      "hashPath": "microsoft.aspnetcore.components.authorization.8.0.1.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Components.Forms/8.0.1": {
       "type": "package",

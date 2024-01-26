@@ -5,6 +5,8 @@ using System.Text;
 using OchronaDanychAPI.Models;
 using OchronaDanychAPI.Services.AuthService;
 using OchronaDanychAPI.Services.TransferService;
+using OchronaDanychShared.Services;
+using Microsoft.AspNetCore.Components.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +22,7 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 //builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<OchronaDanychAPI.Services.AuthService.IAuthService, OchronaDanychAPI.Services.AuthService.AuthService>();
 builder.Services.AddScoped<ITransferService, TransferService>();
 /*
 // Configure app settings
@@ -47,10 +49,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 
+
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("MyCorsePolicy", builder =>
-    builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:5127")); //.WithOrigins("http://localhost:5127")
+    builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:7023")); //.WithOrigins("http://localhost:5127")
 });
 
 //builder.Services.AddCors(options =>
@@ -69,7 +73,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 app.UseCors("MyCorsePolicy");
 

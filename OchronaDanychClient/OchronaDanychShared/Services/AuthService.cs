@@ -21,7 +21,7 @@ namespace OchronaDanychShared.Services
 
         public async Task<ServiceResponse<string>> Login(UserLoginDTO userLoginDto)
         {
-            var result = await _httpClient.PostAsJsonAsync("http://localhost:5093/api/Auth/login", userLoginDto);
+            var result = await _httpClient.PostAsJsonAsync("https://localhost:7230/api/Auth/login", userLoginDto);
 
             var data =  await result.Content.ReadFromJsonAsync<ServiceResponse<string>>();
 

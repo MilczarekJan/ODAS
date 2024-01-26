@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Xs+uX9vB5R6D9W/Vu8Hu/JZ4U2Hv+71AzaFjA61LAFsqRKGNSqbJeuSpjrC8ogMa2UubBLQAVXaNzavk+sXZjQ==",
+  "dgSpecHash": "V4PIlgKNAEvtNmDTlCiyXsyDe6iIVkDFtVqULSjzaZ/tj4vgs7+IrXZjjDtEJl0IEF/7oSVYB40TvA0/2vUb3g==",
   "success": true,
   "projectFilePath": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClient\\OchronaDanychClient.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\milcz\\.nuget\\packages\\microsoft.aspnetcore.authorization\\8.0.1\\microsoft.aspnetcore.authorization.8.0.1.nupkg.sha512",
     "C:\\Users\\milcz\\.nuget\\packages\\microsoft.aspnetcore.components\\8.0.1\\microsoft.aspnetcore.components.8.0.1.nupkg.sha512",
     "C:\\Users\\milcz\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\8.0.1\\microsoft.aspnetcore.components.analyzers.8.0.1.nupkg.sha512",
+    "C:\\Users\\milcz\\.nuget\\packages\\microsoft.aspnetcore.components.authorization\\8.0.1\\microsoft.aspnetcore.components.authorization.8.0.1.nupkg.sha512",
     "C:\\Users\\milcz\\.nuget\\packages\\microsoft.aspnetcore.components.forms\\8.0.1\\microsoft.aspnetcore.components.forms.8.0.1.nupkg.sha512",
     "C:\\Users\\milcz\\.nuget\\packages\\microsoft.aspnetcore.components.web\\8.0.1\\microsoft.aspnetcore.components.web.8.0.1.nupkg.sha512",
     "C:\\Users\\milcz\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly\\8.0.1\\microsoft.aspnetcore.components.webassembly.8.0.1.nupkg.sha512",
