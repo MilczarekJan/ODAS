@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using OchronaDanychShared;
 using OchronaDanychShared.Models;
 using OchronaDanychAPI.Services.TransferService;
+using OchronaDanychShared.Auth;
 
 namespace OchronaDanychAPI.Controllers
 {
@@ -33,6 +34,18 @@ namespace OchronaDanychAPI.Controllers
                 return Ok(result);
             else
                 return StatusCode(500, $"Internal server error {result.Message}");
+        }
+
+        [HttpPost("createTransfer")]
+        public async Task<ActionResult<ServiceResponse<int>>> CreateTransfer([FromBody] BankTransfer transfer)
+        {
+            var response = await _transferService.CreateTransfer(transfer);
+            if (!response.Success)
+            {
+                return BadRequest(response);
+            }
+            return Ok(response);
+
         }
     }
 }

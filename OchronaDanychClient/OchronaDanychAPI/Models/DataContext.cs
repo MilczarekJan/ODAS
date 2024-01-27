@@ -22,8 +22,7 @@ namespace OchronaDanychAPI.Models
 
             modelBuilder.Entity<BankTransfer>()
                 .Property(p => p.Id)
-                .IsRequired()
-                .ValueGeneratedOnAdd();
+                .IsRequired();
 
             modelBuilder.Entity<BankTransfer>()
                 .Property(p => p.Amount)
@@ -36,15 +35,7 @@ namespace OchronaDanychAPI.Models
              .HasMaxLength(200);
 
             modelBuilder.Entity<BankTransfer>()
-            .Property(p => p.Sender_Id)
-            .IsRequired();
-
-            modelBuilder.Entity<BankTransfer>()
             .Property(p => p.Sender_Email)
-            .IsRequired();
-
-            modelBuilder.Entity<BankTransfer>()
-            .Property(p => p.Recipient_Id)
             .IsRequired();
 
             modelBuilder.Entity<BankTransfer>()
@@ -56,6 +47,8 @@ namespace OchronaDanychAPI.Models
             .IsRequired();
 
             modelBuilder.Entity<BankTransfer>().HasData(BankTransferSeeder.GenerateTransferData());
+
+            modelBuilder.Entity<User>().HasKey(p => p.Email);
         }
     }
 }

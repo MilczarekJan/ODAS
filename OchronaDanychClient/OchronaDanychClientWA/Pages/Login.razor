@@ -1,4 +1,4 @@
-﻿@page "/login"
+﻿@page "/"
 @using OchronaDanychShared.Auth
 @using OchronaDanychShared.Services;
 @using Blazored.LocalStorage;
@@ -8,8 +8,10 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
 
+<CascadingAuthenticationState>
+<AuthorizeView>
+<NotAuthorized>
 <PageTitle>BankBankowski S.A</PageTitle>
-
 <h1>Logowanie</h1>
 
 <p>Email:</p>
@@ -25,6 +27,9 @@
 </div>
 
 <button class="btn btn-primary" @onclick="HandleLogin">Log in</button>
+</NotAuthorized>
+</AuthorizeView>
+</CascadingAuthenticationState>
 
 @code {
     private string message = string.Empty;

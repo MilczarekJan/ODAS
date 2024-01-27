@@ -20,9 +20,9 @@ namespace OchronaDanychAPI.Services.AuthService
             _config = config;
         }
 
-        public async Task<ServiceResponse<bool>> ChangePassword(int userId, string newPassword)
+        public async Task<ServiceResponse<bool>> ChangePassword(string userMail, string newPassword)
         {
-            var user = await _context.Users.FindAsync(userId);
+            var user = await _context.Users.FindAsync(userMail);
             if (user == null)
             {
                   return new ServiceResponse<bool>
@@ -92,7 +92,6 @@ namespace OchronaDanychAPI.Services.AuthService
         {
             List<Claim> claims = new List<Claim>()
              {
-                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                  new Claim(ClaimTypes.Name, user.Username),
                  new Claim(ClaimTypes.Email, user.Email),
              };
@@ -112,11 +111,11 @@ namespace OchronaDanychAPI.Services.AuthService
             return tokenHandler;
         }
 
-        public async Task<ServiceResponse<int>> Register(User user, string password)
+        public async Task<ServiceResponse<string>> Register(User user, string password)
         {
             if (await UserExists(user.Email))
             {
-                return new ServiceResponse<int>
+                return new ServiceResponse<string>
                 {
                     Success = false,
                     Message = "User already exists."
@@ -138,7 +137,7 @@ namespace OchronaDanychAPI.Services.AuthService
             // save changes
             await _context.SaveChangesAsync();
 
-            return new ServiceResponse<int> { Success = true, Data = user.Id, Message = "Registration successful!" };
+            return new ServiceResponse<string> { Success = true, Data = user.Email, Message = "Registration successful!" };
 
         }
 

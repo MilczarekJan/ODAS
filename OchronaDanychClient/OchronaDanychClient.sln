@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OchronaDanychAPI", "Ochrona
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OchronaDanychShared", "OchronaDanychShared\OchronaDanychShared.csproj", "{309EAE12-1B09-4E6C-BB29-504682E656D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OchronaDanychClientWA", "OchronaDanychClientWA\OchronaDanychClientWA.csproj", "{6971917B-A44F-423B-8483-02DD6EDF711C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OchronaDanychClientWA", "OchronaDanychClientWA\OchronaDanychClientWA.csproj", "{6971917B-A44F-423B-8483-02DD6EDF711C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

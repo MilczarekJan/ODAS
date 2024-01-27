@@ -7,10 +7,10 @@ namespace OchronaDanychAPI.Services.AuthService
     {
         Task<ServiceResponse<string>> Login(string email, PasswordPair[] password);
 
-        Task<ServiceResponse<int>> Register(User user, string password);
+        Task<ServiceResponse<string>> Register(User user, string password);
 
         Task<bool> UserExists(string email);
 
-        Task<ServiceResponse<bool>> ChangePassword(int userId, string newPassword);
+        Task<ServiceResponse<bool>> ChangePassword(string userMail, string newPassword);
     }
 }

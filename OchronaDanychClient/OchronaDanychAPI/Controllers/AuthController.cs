@@ -43,7 +43,9 @@ namespace OchronaDanychAPI.Controllers
             var user = new User()
             {
                 Email = userRegisterDTO.Email,
-                Username = userRegisterDTO.Username
+                Username = userRegisterDTO.Username,
+                Balance = userRegisterDTO.Balance,
+                DocumentNumber = userRegisterDTO.DocumentNumber
             };
 
             var response = await _authService.Register(user, userRegisterDTO.Password);
@@ -58,8 +60,8 @@ namespace OchronaDanychAPI.Controllers
         [HttpPost("change-password"), Authorize]
         public async Task<ActionResult<ServiceResponse<bool>>> ChangePassword([FromBody] string newPassword)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var response = await _authService.ChangePassword(int.Parse(userId), newPassword);
+            var userId = User.FindFirstValue(ClaimTypes.Email);
+            var response = await _authService.ChangePassword(userId, newPassword);
             if (!response.Success)
             {
                 return BadRequest(response);

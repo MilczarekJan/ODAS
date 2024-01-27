@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OchronaDanychAPI.Models;
 using OchronaDanychShared;
+using OchronaDanychShared.Auth;
 using OchronaDanychShared.Models;
 
 namespace OchronaDanychAPI.Services.TransferService
@@ -38,6 +39,13 @@ namespace OchronaDanychAPI.Services.TransferService
                 };
             }
 
+        }
+
+        public async Task<ServiceResponse<string>> CreateTransfer(BankTransfer transfer)
+        {
+            await _dataContext.BankTransfers.AddAsync(transfer);
+            await _dataContext.SaveChangesAsync();
+            return new ServiceResponse<string> { Success = true, Data = transfer.Title, Message = "Transaction successful!" };
         }
     }
 }

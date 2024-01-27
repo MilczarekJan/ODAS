@@ -21,5 +21,11 @@ namespace OchronaDanychShared.Auth
 
         [Required, MinLength(3)]
         public string Username { get; set; } = string.Empty;
+
+        [Required]
+        public double Balance { get; set; }
+
+        [Required]
+        public string DocumentNumber { get; set; } = string.Empty;
     }
 }

@@ -7,6 +7,11 @@
 @inject NavigationManager NavigationManager
 <div class="page">
     <div class="sidebar">
+     <CascadingAuthenticationState>
+        <AuthorizeView>
+            <NavMenu />
+        </AuthorizeView>
+     </CascadingAuthenticationState>
     </div>
 
     <main>
@@ -22,7 +27,6 @@
                     <a href="#" @onclick="Logout">Logout</a>
                 </Authorized>
                 <NotAuthorized>
-                    <a href="/login">Login</a>
                 </NotAuthorized>
             </AuthorizeView>
             </CascadingAuthenticationState>
@@ -42,6 +46,6 @@
     {
         await LocalStorageService.RemoveItemAsync("authToken");
         await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        NavigationManager.NavigateTo("/login");
+        NavigationManager.NavigateTo("/");
     }
 }
