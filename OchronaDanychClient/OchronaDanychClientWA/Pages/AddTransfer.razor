@@ -1,0 +1,54 @@
+﻿@page "/newTransfer"
+@using OchronaDanychShared.Models
+@using Blazored.LocalStorage;
+@using System.Security.Claims;
+@using Syncfusion.Blazor
+@using Syncfusion.Blazor.Inputs
+@inject ILocalStorageService LocalStorageService
+@inject AuthenticationStateProvider authenticationStateProvider
+@inject AddTransferService addTransferService
+<h3>New Transfer</h3>
+
+<SfTextBox Placeholder='Title' Value="@transferTitle" @oninput="UpdateTransferTitle"></SfTextBox>
+<SfTextBox Placeholder='Recipient Email' Value="@recipientMail" @oninput="UpdateTransferRecipientMail"></SfTextBox>
+<SfTextBox Placeholder='Amount' Value="@transferAmount" @oninput="UpdateTransferAmount"></SfTextBox>
+<button class="btn btn-primary" @onclick="AddShoeFromApi">New Transfer</button>
+<p>Transfer status: @transferNameToDisplay</p>
+
+@code {
+	private string transferNameToDisplay = "";
+	public string transferTitle { get; set; } = "";
+	public string recipientMail { get; set; } = "";
+	public string transferAmount { get; set; } = "";
+	bool success;
+
+	private void UpdateTransferTitle(ChangeEventArgs args)
+	{
+		transferTitle = args.Value.ToString();
+	}
+
+	private void UpdateTransferRecipientMail(ChangeEventArgs args)
+	{
+		recipientMail = args.Value.ToString();
+	}
+
+	private void UpdateTransferAmount(ChangeEventArgs args)
+	{
+		transferAmount = args.Value.ToString();
+	}
+
+	public async Task AddShoeFromApi()
+	{
+		var token = await LocalStorageService.GetItemAsStringAsync("authToken");
+		token = token.Replace("\"", "");
+		var auth = await authenticationStateProvider.GetAuthenticationStateAsync();
+		var sender = auth.User.Claims.Where(c => c.Type == ClaimTypes.Email).FirstOrDefault().Value;
+		BankTransferDTO transfer = new BankTransferDTO(double.Parse(transferAmount), transferTitle, sender, recipientMail, "USER");
+		success = await addTransferService.AddTransferFromApi(token, transfer);
+		if (success)
+		{
+			transferNameToDisplay = "Success";
+		}
+		else transferNameToDisplay = "Wrong data";
+	}
+}

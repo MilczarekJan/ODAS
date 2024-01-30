@@ -8,7 +8,7 @@ namespace OchronaDanychAPI.Services.TransferService
     {
         Task<ServiceResponse<List<BankTransfer>>> GetTransfersAsync(string email);
         Task<ServiceResponse<List<BankTransfer>>> GetTransfersByMailAsync(string email);
-        Task<ServiceResponse<string>> CreateTransfer(BankTransfer transfer);
+        Task<ServiceResponse<string>> CreateTransfer(BankTransferDTO transfer);
 
     }
 }

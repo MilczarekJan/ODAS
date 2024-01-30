@@ -37,7 +37,7 @@ namespace OchronaDanychAPI.Controllers
         }
 
         [HttpPost("createTransfer")]
-        public async Task<ActionResult<ServiceResponse<int>>> CreateTransfer([FromBody] BankTransfer transfer)
+        public async Task<ActionResult<ServiceResponse<int>>> CreateTransfer([FromBody] BankTransferDTO transfer)
         {
             var response = await _transferService.CreateTransfer(transfer);
             if (!response.Success)

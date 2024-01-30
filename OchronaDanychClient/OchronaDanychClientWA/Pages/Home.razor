@@ -1,7 +1,18 @@
 ﻿@page "/home"
+@using OchronaDanychShared.Models
+@using Blazored.LocalStorage;
+@using System.Security.Claims;
+@inject ILocalStorageService LocalStorageService
+@inject AuthenticationStateProvider authenticationStateProvider
+@inject NavigationManager NavigationManager
+@inject OchronaDanychShared.Services.GetTransfersService getTransfersService
 
 <PageTitle>Bank Bankowski S.A</PageTitle>
 
 <h1>Czołem!</h1>
 
-Twoje saldo wynosi: 1000zl
+<CascadingAuthenticationState>
+    <AuthorizeView>
+        Twoje saldo wynosi: @context.User.Claims.Where(c => c.Type == ClaimTypes.UserData).FirstOrDefault().Value
+    </AuthorizeView>
+</CascadingAuthenticationState>

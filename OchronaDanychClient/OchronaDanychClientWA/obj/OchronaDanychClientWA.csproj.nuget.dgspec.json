@@ -93,6 +93,10 @@
               "target": "Package",
               "version": "[8.0.1, )",
               "autoReferenced": true
+            },
+            "Syncfusion.Blazor": {
+              "target": "Package",
+              "version": "[24.1.47, )"
             }
           },
           "imports": [

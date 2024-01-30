@@ -68,5 +68,20 @@ namespace OchronaDanychAPI.Controllers
             }
             return Ok(response);
         }
+
+        /*
+        [HttpPut("changebalance")]
+        public async Task<ActionResult<ServiceResponse<string>>> ChangeBalance(string amount)
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            var response = await _authService.ChangeBalance(email, amount);
+            if (!response.Success)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
+        }
+        */
     }
 }

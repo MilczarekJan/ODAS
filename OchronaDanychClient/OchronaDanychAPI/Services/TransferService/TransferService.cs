@@ -78,9 +78,30 @@ namespace OchronaDanychAPI.Services.TransferService
             }
         }
 
-        public async Task<ServiceResponse<string>> CreateTransfer(BankTransfer transfer)
+        public async Task<ServiceResponse<string>> CreateTransfer(BankTransferDTO transfer)
         {
-            await _dataContext.BankTransfers.AddAsync(transfer);
+            var sender = await _dataContext.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == transfer.Sender_Email.ToLower());
+            var recipient = await _dataContext.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == transfer.Recipient_Email.ToLower());
+
+            if (sender == null || recipient == null) {
+                return new ServiceResponse<string> { Success = false, Data = transfer.Title, Message = "Wrong transaction" };
+            }
+
+            if (sender.Balance < transfer.Amount || transfer.Amount <= 0)
+            {
+                return new ServiceResponse<string> { Success = false, Data = transfer.Title, Message = "Not enough funds" };
+            }
+
+            if (transfer.Recipient_Name == "USER") {
+                transfer.Recipient_Name = recipient.Username;
+            }
+
+            sender.Balance -= transfer.Amount;
+            recipient.Balance += transfer.Amount;
+            BankTransfer transferToAdd = new BankTransfer(transfer);
+            _dataContext.BankTransfers.Add(transferToAdd);
+            _dataContext.Users.Update(sender);
+            _dataContext.Users.Update(recipient);
             await _dataContext.SaveChangesAsync();
             return new ServiceResponse<string> { Success = true, Data = transfer.Title, Message = "Transaction successful!" };
         }

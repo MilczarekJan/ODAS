@@ -14,5 +14,13 @@ namespace OchronaDanychShared.Models
         public string Sender_Email { get; set; }
         public string Recipient_Name { get; set; }
         public string Recipient_Email { get; set; }
+        public BankTransfer(BankTransferDTO transfer) { 
+            this.Amount = transfer.Amount;
+            this.Title = transfer.Title;
+            this.Sender_Email = transfer.Sender_Email;
+            this.Recipient_Email = transfer.Recipient_Email;
+            this.Recipient_Name = transfer.Recipient_Name;
+        }
+        public BankTransfer() { }
     }
 }

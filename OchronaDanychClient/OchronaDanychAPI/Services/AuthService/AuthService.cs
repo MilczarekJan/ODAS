@@ -71,6 +71,20 @@ namespace OchronaDanychAPI.Services.AuthService
             return response;
         }
 
+        /*
+        public async Task<ServiceResponse<bool>> ChangeBalance(string email, string amount) {
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower());
+            user.Balance += Double.Parse(amount);
+            await _context.SaveChangesAsync();
+            return new ServiceResponse<bool>
+            {
+                Data = true,
+                Message = "Password updated successfully.",
+                Success = true
+            };
+        }
+        */
+
         private bool VerifyPasswordHash(PasswordPair[] password, byte[] lettersHash, byte[] lettersSalt)
         {
             foreach( var pair in password)
@@ -94,6 +108,7 @@ namespace OchronaDanychAPI.Services.AuthService
              {
                  new Claim(ClaimTypes.Name, user.Username),
                  new Claim(ClaimTypes.Email, user.Email),
+                 new Claim(ClaimTypes.UserData, user.Balance.ToString())
              };
 
             SymmetricSecurityKey key =

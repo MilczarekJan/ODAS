@@ -12,5 +12,7 @@ namespace OchronaDanychAPI.Services.AuthService
         Task<bool> UserExists(string email);
 
         Task<ServiceResponse<bool>> ChangePassword(string userMail, string newPassword);
+
+        //Task<ServiceResponse<bool>> ChangeBalance(string email, string amount);
     }
 }
