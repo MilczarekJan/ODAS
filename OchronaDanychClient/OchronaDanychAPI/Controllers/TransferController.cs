@@ -24,11 +24,11 @@ namespace OchronaDanychAPI.Controllers
             _logger = logger;
         }
 
-        [HttpGet, Authorize]//, Authorize
+        [HttpGet, Authorize]
         public async Task<ActionResult<ServiceResponse<List<BankTransfer>>>> GetBankTransfers(string email)
         {
 
-            var result = await _transferService.GetTransfersByMailAsync(email);
+            var result = await _transferService.GetTransfersAsync(email);
 
             if (result.Success)
                 return Ok(result);

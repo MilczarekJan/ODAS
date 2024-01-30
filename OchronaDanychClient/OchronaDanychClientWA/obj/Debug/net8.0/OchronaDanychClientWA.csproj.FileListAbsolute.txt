@@ -1119,3 +1119,8 @@ C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychClientWA\obj\D
 C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychClientWA\obj\Debug\net8.0\refint\OchronaDanychClientWA.dll
 C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychClientWA\obj\Debug\net8.0\OchronaDanychClientWA.pdb
 C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychClientWA\obj\Debug\net8.0\ref\OchronaDanychClientWA.dll
+C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychClientWA\bin\Debug\net8.0\wwwroot\_framework\Newtonsoft.Json.wasm
+C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychClientWA\bin\Debug\net8.0\wwwroot\_framework\Newtonsoft.Json.wasm.gz
+C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychClientWA\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychClientWA\obj\Debug\net8.0\webcil\Newtonsoft.Json.wasm
+C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychClientWA\obj\Debug\net8.0\compressed\svlkfg4y29.gz

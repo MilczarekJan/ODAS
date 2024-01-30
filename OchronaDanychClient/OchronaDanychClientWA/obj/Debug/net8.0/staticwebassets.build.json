@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9a6qNjhXu0jdzoqd2HLSpWFl/Uk2Po0Llut5rLkH6Xo=",
+  "Hash": "tOu158m4faLpchnhqf/crkwuoMy+9x7msGyQ8ZFzA6U=",
   "Source": "OchronaDanychClientWA",
   "BasePath": "/",
   "Mode": "Root",
@@ -1060,6 +1060,25 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClientWA\\obj\\Debug\\net8.0\\webcil\\netstandard.wasm"
+    },
+    {
+      "Identity": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClientWA\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Newtonsoft.Json.wasm",
+      "SourceId": "OchronaDanychClientWA",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClientWA\\bin\\Debug\\net8.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Newtonsoft.Json.wasm",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "WasmResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClientWA\\obj\\Debug\\net8.0\\webcil\\Newtonsoft.Json.wasm"
     },
     {
       "Identity": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClientWA\\bin\\Debug\\net8.0\\wwwroot\\_framework\\OchronaDanychClientWA.pdb",
@@ -7558,6 +7577,25 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClientWA\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Net.WebSockets.Client.wasm"
+    },
+    {
+      "Identity": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClientWA\\obj\\Debug\\net8.0\\compressed\\svlkfg4y29.gz",
+      "SourceId": "OchronaDanychClientWA",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClientWA\\bin\\Debug\\net8.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Newtonsoft.Json.wasm.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClientWA\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Newtonsoft.Json.wasm",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClientWA\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Newtonsoft.Json.wasm"
     },
     {
       "Identity": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClientWA\\obj\\Debug\\net8.0\\compressed\\t7yj2pmmgj.gz",

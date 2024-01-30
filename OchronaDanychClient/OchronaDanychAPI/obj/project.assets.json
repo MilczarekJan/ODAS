@@ -2086,6 +2086,7 @@
           "Microsoft.AspNetCore.Components.Authorization": "8.0.1",
           "Microsoft.EntityFrameworkCore": "8.0.1",
           "Microsoft.IdentityModel.Tokens": "7.2.0",
+          "Newtonsoft.Json": "13.0.3",
           "System.IdentityModel.Tokens.Jwt": "7.2.0"
         },
         "compile": {

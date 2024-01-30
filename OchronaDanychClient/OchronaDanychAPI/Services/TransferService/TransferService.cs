@@ -14,15 +14,20 @@ namespace OchronaDanychAPI.Services.TransferService
         {
             _dataContext = dataContext;
         }
-        public async Task<ServiceResponse<List<BankTransfer>>> GetTransfersAsync()
+        public async Task<ServiceResponse<List<BankTransfer>>> GetTransfersAsync(string email)
         {
-            var transfers = await _dataContext.BankTransfers.ToListAsync();
+            var transfers = await _dataContext.BankTransfers
+                .Where(t => t.Sender_Email.ToString() == email)
+                .ToListAsync();
+            var transfersReceived = await _dataContext.BankTransfers
+                .Where(t => t.Recipient_Email.ToString() == email).ToListAsync();
+            var allTransfers = transfers.Concat(transfersReceived).ToList();
 
             try
             {
                 var response = new ServiceResponse<List<BankTransfer>>()
                 {
-                    Data = transfers,
+                    Data = allTransfers,
                     Message = "Ok",
                     Success = true
                 };
@@ -42,12 +47,15 @@ namespace OchronaDanychAPI.Services.TransferService
         }
 
         public async Task<ServiceResponse<List<BankTransfer>>> GetTransfersByMailAsync(string email) {
-            var transfers = await _dataContext.BankTransfers
-                .Where(t => t.Sender_Email == email)
+            /*
+                         var transfers = await _dataContext.BankTransfers
+                .Where(t => t.Sender_Email.ToString() == email)
                 .ToListAsync();
             var transfersReceived = await _dataContext.BankTransfers
-                .Where(t => t.Recipient_Email == email).ToListAsync();
+                .Where(t => t.Recipient_Email.ToString() == email).ToListAsync();
             var allTransfers = transfers.Concat(transfersReceived).ToList();
+             */
+            var allTransfers = await _dataContext.BankTransfers.ToListAsync();
             try
             {
                 var response = new ServiceResponse<List<BankTransfer>>()

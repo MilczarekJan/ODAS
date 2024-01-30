@@ -19,6 +19,7 @@ var uriBuilder = new UriBuilder("http://localhost:5093") //appSettingsSection.Ba
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
+builder.Services.AddScoped<GetTransfersService>();
 builder.Services.AddHttpClient<IAuthService, AuthService>(client => client.BaseAddress = uriBuilder.Uri);
 builder.Services.AddScoped<Random>();
 await builder.Build().RunAsync();
