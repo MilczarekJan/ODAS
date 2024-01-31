@@ -9,40 +9,86 @@
 @inject NavigationManager NavigationManager
 
 <CascadingAuthenticationState>
-<AuthorizeView>
-<NotAuthorized>
-<PageTitle>BankBankowski S.A</PageTitle>
-<h1>Logowanie</h1>
+    <AuthorizeView>
+        <NotAuthorized>
+            <PageTitle>BankBankowski S.A</PageTitle>
+            <h1>Logowanie</h1>
 
-<p>Email:</p>
-<InputText @bind-Value="mail" id="email"></InputText>
+            <p>Email:</p>
+            <InputText @bind-Value="mail" id="email"></InputText>
 
-<p>Password:</p>
-<div style="display: flex; gap: 5px;">
-    <InputText @bind-Value="char_0" type="password" id="password_1" maxlength="1" style="width: 25px; height: 25px;"></InputText>
-    <InputText @bind-Value="char_1" type="password" id="password_2" maxlength="1" style="width: 25px; height: 25px;"></InputText>
-    <InputText @bind-Value="char_2" type="password" id="password_3" maxlength="1" style="width: 25px; height: 25px;"></InputText>
-    <InputText @bind-Value="char_3" type="password" id="password_4" maxlength="1" style="width: 25px; height: 25px;"></InputText>
-    <InputText @bind-Value="char_4" type="password" id="password_5" maxlength="1" style="width: 25px; height: 25px;"></InputText>
-</div>
+            <p>Password:</p>
+            <div style="display: flex; gap: 5px;">
+                <InputText @bind-Value="char_0" type="password" id="password_1" maxlength="1" style="width: 25px; height: 25px;"></InputText>
+                <InputText @bind-Value="char_1" type="password" id="password_2" maxlength="1" style="width: 25px; height: 25px;"></InputText>
+                <InputText @bind-Value="char_2" type="password" id="password_3" maxlength="1" style="width: 25px; height: 25px;"></InputText>
+                <InputText @bind-Value="char_3" type="password" id="password_4" maxlength="1" style="width: 25px; height: 25px;"></InputText>
+                <InputText @bind-Value="char_4" type="password" id="password_5" maxlength="1" style="width: 25px; height: 25px;"></InputText>
+            </div>
 
-<button class="btn btn-primary" @onclick="HandleLogin">Log in</button>
-</NotAuthorized>
-</AuthorizeView>
+            <button class="btn btn-primary" @onclick="HandleLogin" disabled="@isButtonDisabled" style="background-color: @(isButtonDisabled ? "#cccccc" : "")">Log in</button>
+
+            <a> @message </a>
+        </NotAuthorized>
+    </AuthorizeView>
 </CascadingAuthenticationState>
 
 @code {
     private string message = string.Empty;
-    private string char_0;
-    private string char_1;
-    private string char_2;
-    private string char_3;
-    private string char_4;
-    private string mail;
+    private string char_0 = "";
+    private string char_1 = "";
+    private string char_2 = "";
+    private string char_3 = "";
+    private string char_4 = "";
+    private string mail = "";
+    private int loginAttempts;
+    private DateTime lastLoginAttemptTime;
     private UserLoginDTO userLoginDTO = new UserLoginDTO(new PasswordPair[5]);
+    private bool isButtonDisabled = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if ((DateTime.Now - lastLoginAttemptTime).TotalMinutes >= 5)
+        {
+            loginAttempts = 0;
+            await LocalStorageService.SetItemAsync("loginAttempts", loginAttempts);
+            await LocalStorageService.SetItemAsync("lastLoginAttemptTime", lastLoginAttemptTime);
+        }
+        var loginAttemptsValue = await LocalStorageService.GetItemAsync<int?>("loginAttempts");
+        loginAttempts = loginAttemptsValue ?? 0;
+
+        var lastLoginAttemptTimeValue = await LocalStorageService.GetItemAsync<DateTime?>("lastLoginAttemptTime");
+        lastLoginAttemptTime = lastLoginAttemptTimeValue ?? DateTime.MinValue;
+    }
 
     private async Task HandleLogin()
     {
+        // Disable the button
+        isButtonDisabled = true;
+
+        if (loginAttempts >= 5 && (DateTime.Now - lastLoginAttemptTime).TotalMinutes < 5)
+        {
+            // User has exceeded login attempts, and 5 minutes haven't passed
+            message = "Too many failed login attempts. Please wait 5 minutes before trying again.";
+
+            // Re-enable the button
+            isButtonDisabled = false;
+
+            return;
+        }
+
+        if (char_0 == "" || char_1 == "" || char_2 == "" || char_3 == "" || char_4 == "" || mail == "")
+        {
+            message = "Login unsuccessful";
+
+            // Re-enable the button
+            isButtonDisabled = false;
+
+            return;
+        }
+
+        await Task.Delay(3000);
+
         PasswordPair p0 = new PasswordPair(char_0[0], 0);
         PasswordPair p1 = new PasswordPair(char_1[0], 1);
         PasswordPair p2 = new PasswordPair(char_2[0], 2);
@@ -51,7 +97,9 @@
         PasswordPair[] pairArray = { p0, p1, p2, p3, p4 };
         userLoginDTO = new UserLoginDTO(pairArray);
         userLoginDTO.Email = mail;
+
         var result = await AuthService.Login(userLoginDTO);
+
         if (result.Success)
         {
             await LocalStorageService.SetItemAsync("authToken", result.Data);
@@ -61,7 +109,17 @@
         }
         else
         {
-            NavigationManager.NavigateTo("/counter");
+            loginAttempts++;
+            lastLoginAttemptTime = DateTime.Now;
+
+            // Store values in local storage
+            await LocalStorageService.SetItemAsync("loginAttempts", loginAttempts);
+            await LocalStorageService.SetItemAsync("lastLoginAttemptTime", lastLoginAttemptTime);
+
+            message = "Login unsuccessful";
         }
+
+        // Re-enable the button
+        isButtonDisabled = false;
     }
 }

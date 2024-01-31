@@ -44,11 +44,10 @@ namespace OchronaDanychAPI.Controllers
             {
                 Email = userRegisterDTO.Email,
                 Username = userRegisterDTO.Username,
-                Balance = userRegisterDTO.Balance,
-                DocumentNumber = userRegisterDTO.DocumentNumber
+                Balance = userRegisterDTO.Balance
             };
 
-            var response = await _authService.Register(user, userRegisterDTO.Password);
+            var response = await _authService.Register(user, userRegisterDTO.Password, userRegisterDTO.DocumentNumber);
             if (!response.Success)
             {
                 return BadRequest(response);

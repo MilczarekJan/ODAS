@@ -126,7 +126,7 @@ namespace OchronaDanychAPI.Services.AuthService
             return tokenHandler;
         }
 
-        public async Task<ServiceResponse<string>> Register(User user, string password)
+        public async Task<ServiceResponse<string>> Register(User user, string password, string documentNumber)
         {
             if (await UserExists(user.Email))
             {
@@ -140,12 +140,17 @@ namespace OchronaDanychAPI.Services.AuthService
             // create password hash and salt
             CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
             CreateLettersHash(password, out byte[] lettersHash, out byte[] lettersSalt);
+            CreatePasswordHash(documentNumber, out byte[] documentHash, out byte[] documentSalt);
+            List<byte> documentList = documentHash.ToList();
+            documentList.AddRange(documentSalt);
+            documentHash = documentList.ToArray();
 
             // assign hash and salt to user
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
             user.LettersHash = lettersHash;
             user.LettersSalt = lettersSalt;
+            user.DocumentNumber = documentHash;
 
             // add user to db
             await _context.Users.AddAsync(user);

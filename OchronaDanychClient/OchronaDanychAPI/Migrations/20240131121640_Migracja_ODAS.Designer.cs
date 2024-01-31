@@ -11,7 +11,7 @@ using OchronaDanychAPI.Models;
 namespace OchronaDanychAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240127012412_Migracja_ODAS")]
+    [Migration("20240131121640_Migracja_ODAS")]
     partial class Migracja_ODAS
     {
         /// <inheritdoc />
@@ -32,9 +32,9 @@ namespace OchronaDanychAPI.Migrations
                     b.Property<double>("Balance")
                         .HasColumnType("float");
 
-                    b.Property<string>("DocumentNumber")
+                    b.Property<byte[]>("DocumentNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("LettersHash")
                         .IsRequired()

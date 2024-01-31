@@ -7,7 +7,7 @@ namespace OchronaDanychAPI.Services.AuthService
     {
         Task<ServiceResponse<string>> Login(string email, PasswordPair[] password);
 
-        Task<ServiceResponse<string>> Register(User user, string password);
+        Task<ServiceResponse<string>> Register(User user, string password, string documentNumber);
 
         Task<bool> UserExists(string email);
 
