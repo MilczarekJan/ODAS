@@ -9,6 +9,8 @@ namespace OchronaDanychShared.Auth
     public class User
     {
         public byte[] DocumentNumber { get; set; }
+        public byte[] DocumentIv { get; set; }
+        public byte[] DocumentKey { get; set; }
         public string Username { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }

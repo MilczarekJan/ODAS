@@ -29,6 +29,14 @@ namespace OchronaDanychAPI.Migrations
                     b.Property<double>("Balance")
                         .HasColumnType("float");
 
+                    b.Property<byte[]>("DocumentIv")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("DocumentKey")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<byte[]>("DocumentNumber")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");

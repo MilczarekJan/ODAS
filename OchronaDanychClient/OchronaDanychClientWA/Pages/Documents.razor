@@ -1,0 +1,48 @@
+﻿@page "/showDocuments"
+@using OchronaDanychShared.Models
+@using Blazored.LocalStorage;
+@using System.Security.Claims;
+@inject ILocalStorageService LocalStorageService
+@inject AuthenticationStateProvider authenticationStateProvider
+@inject NavigationManager NavigationManager
+@inject IAuthService authService;
+@inject OchronaDanychShared.Services.GetDocumentsService getDocumentsService
+
+<PageTitle>Bank Bankowski S.A</PageTitle>
+
+<h1>Czołem!</h1>
+
+<CascadingAuthenticationState>
+    <AuthorizeView>
+        <InputText @bind-Value="password" type="password" id="o_password" @oninput="UpdatePassword"></InputText>
+        <button class="btn btn-primary" @onclick="GetUserDataFromApi">Show document</button>
+        <p>Document: @document </p>
+    </AuthorizeView>
+</CascadingAuthenticationState>
+
+@code {
+
+    string document = "";
+    public string password { get; set; } = "";
+    bool success;
+
+    private void UpdatePassword(ChangeEventArgs args)
+    {
+        password = args.Value.ToString();
+    }
+
+    public async Task GetUserDataFromApi()
+    {
+        var auth = await authenticationStateProvider.GetAuthenticationStateAsync();
+        var email = auth.User.Claims.Where(c => c.Type == ClaimTypes.Email).FirstOrDefault().Value;
+        var token = await LocalStorageService.GetItemAsStringAsync("authToken");
+        token = token.Replace("\"", "");
+        success = await authService.CheckPassword(token, email, password);
+        if (!success)
+        {
+            document = "Wrong password";
+            return;
+        }
+        document = await getDocumentsService.GetDocumentsFromApi(token, email);
+    }
+}

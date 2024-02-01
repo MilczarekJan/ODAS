@@ -20,7 +20,7 @@ namespace OchronaDanychAPI.Controllers
         }
 
         [HttpGet("document"), Authorize]
-        public async Task<ActionResult<ServiceResponse<string>>> SecretText(string email)
+        public async Task<ActionResult<ServiceResponse<string>>> Document(string email)
         {
             var response = await _authService.GetDocumentNumber(email);
             if (!response.Success)

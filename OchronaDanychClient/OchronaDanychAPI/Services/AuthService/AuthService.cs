@@ -131,10 +131,7 @@ namespace OchronaDanychAPI.Services.AuthService
             // create password hash and salt
             CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
             CreateLettersHash(password, out byte[] lettersHash, out byte[] lettersSalt);
-            CreatePasswordHash(documentNumber, out byte[] documentHash, out byte[] documentSalt);
-            List<byte> documentList = documentHash.ToList();
-            documentList.AddRange(documentSalt);
-            documentHash = documentList.ToArray();
+            EncryptStringToBytes_Aes(documentNumber, out byte[] docKey, out byte[] docIV, out byte[] documentHash);
 
             // assign hash and salt to user
             user.PasswordHash = passwordHash;
@@ -142,6 +139,8 @@ namespace OchronaDanychAPI.Services.AuthService
             user.LettersHash = lettersHash;
             user.LettersSalt = lettersSalt;
             user.DocumentNumber = documentHash;
+            user.DocumentIv = docIV;
+            user.DocumentKey = docKey;
 
             // add user to db
             await _context.Users.AddAsync(user);
@@ -153,8 +152,15 @@ namespace OchronaDanychAPI.Services.AuthService
         }
 
         public async Task<ServiceResponse<string>> GetDocumentNumber(string email) {
-           return new ServiceResponse<string> { Success = true, Data = email, Message = "TODO" };
-        }
+			var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == email);
+            string document = DecryptStringFromBytes_Aes(user.DocumentNumber, user.DocumentKey, user.DocumentIv);
+			return new ServiceResponse<string>
+			{
+				Data = document,
+				Message = "Balance accessed successfully.",
+				Success = true
+			};
+		}
 
         public async Task<ServiceResponse<string>> GetBalance(string email)
         {
@@ -171,21 +177,23 @@ namespace OchronaDanychAPI.Services.AuthService
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == email);
 			var hmac = new System.Security.Cryptography.HMACSHA512(user.PasswordSalt);
-			if (user.PasswordHash == hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password))) {
-				return new ServiceResponse<bool>
-				{
-					Data = true,
-					Message = "success",
-					Success = true
-				};
-			}
+            var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            if (!computedHash.SequenceEqual(user.PasswordHash))
+            {
+                return new ServiceResponse<bool>
+                {
+                    Data = false,
+                    Message = "Wrong password",
+                    Success = false
+                };
+            }
             else return new ServiceResponse<bool>
-			{
-				Data = false,
-				Message = "Wrong password",
-				Success = false
-			};
-		}
+            {
+                Data = true,
+                Message = "success",
+                Success = true
+            };
+        }
 
         public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
@@ -225,5 +233,79 @@ namespace OchronaDanychAPI.Services.AuthService
             }
             return false;
         }
-    }
+
+		public void EncryptStringToBytes_Aes(string docNumber, out byte[] Key, out byte[] IV, out byte[] encrypted)
+		{
+			// Check arguments.
+			if (docNumber == null || docNumber.Length <= 0)
+				throw new ArgumentNullException("docNumber");
+
+			// Create an Aes object
+			// with the specified key and IV.
+			using (Aes aesAlg = Aes.Create())
+			{
+                Key = aesAlg.Key; 
+                IV = aesAlg.IV;
+
+				// Create an encryptor to perform the stream transform.
+				ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+
+				// Create the streams used for encryption.
+				using (MemoryStream msEncrypt = new MemoryStream())
+				{
+					using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+					{
+						using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
+						{
+							//Write all data to the stream.
+							swEncrypt.Write(docNumber);
+						}
+						encrypted = msEncrypt.ToArray();
+					}
+				}
+			}
+		}
+
+		public string DecryptStringFromBytes_Aes(byte[] cipherText, byte[] Key, byte[] IV)
+		{
+			// Check arguments.
+			if (cipherText == null || cipherText.Length <= 0)
+				throw new ArgumentNullException("cipherText");
+			if (Key == null || Key.Length <= 0)
+				throw new ArgumentNullException("Key");
+			if (IV == null || IV.Length <= 0)
+				throw new ArgumentNullException("IV");
+
+			// Declare the string used to hold
+			// the decrypted text.
+			string plaintext = null;
+
+			// Create an Aes object
+			// with the specified key and IV.
+			using (Aes aesAlg = Aes.Create())
+			{
+				aesAlg.Key = Key;
+				aesAlg.IV = IV;
+
+				// Create a decryptor to perform the stream transform.
+				ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+
+				// Create the streams used for decryption.
+				using (MemoryStream msDecrypt = new MemoryStream(cipherText))
+				{
+					using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+					{
+						using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+						{
+
+							// Read the decrypted bytes from the decrypting stream
+							// and place them in a string.
+							plaintext = srDecrypt.ReadToEnd();
+						}
+					}
+				}
+			}
+			return plaintext;
+		}
+	}
 }
