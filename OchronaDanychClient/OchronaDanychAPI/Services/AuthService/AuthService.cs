@@ -6,6 +6,8 @@ using System.Text;
 using OchronaDanychShared;
 using OchronaDanychShared.Auth;
 using OchronaDanychAPI.Models;
+using System.Security.Cryptography;
+using System.Security.Cryptography.Xml;
 
 namespace OchronaDanychAPI.Services.AuthService
 {
@@ -33,14 +35,17 @@ namespace OchronaDanychAPI.Services.AuthService
             }
 
             CreatePasswordHash(newPassword, out byte[] passwordHash, out byte[] passwordSalt);
+            CreateLettersHash(newPassword, out byte[] lettersHash, out byte[] lettersSalt);
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
+            user.LettersHash = lettersHash;
+            user.LettersSalt = lettersSalt;
 
             await _context.SaveChangesAsync();
             return new ServiceResponse<bool>
             {
                 Data = true,
-                Message = "Password updated successfully.",
+                Message = "success",
                 Success = true
             };
         }
@@ -70,20 +75,6 @@ namespace OchronaDanychAPI.Services.AuthService
            
             return response;
         }
-
-        /*
-        public async Task<ServiceResponse<bool>> ChangeBalance(string email, string amount) {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower());
-            user.Balance += Double.Parse(amount);
-            await _context.SaveChangesAsync();
-            return new ServiceResponse<bool>
-            {
-                Data = true,
-                Message = "Password updated successfully.",
-                Success = true
-            };
-        }
-        */
 
         private bool VerifyPasswordHash(PasswordPair[] password, byte[] lettersHash, byte[] lettersSalt)
         {
@@ -161,6 +152,41 @@ namespace OchronaDanychAPI.Services.AuthService
 
         }
 
+        public async Task<ServiceResponse<string>> GetDocumentNumber(string email) {
+           return new ServiceResponse<string> { Success = true, Data = email, Message = "TODO" };
+        }
+
+        public async Task<ServiceResponse<string>> GetBalance(string email)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == email);
+            return new ServiceResponse<string>
+            {
+                Data = user.Balance.ToString(),
+                Message = "Balance accessed successfully.",
+                Success = true
+            };
+        }
+
+        public async Task<ServiceResponse<bool>> CheckPassword(string email, string password) 
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == email);
+			var hmac = new System.Security.Cryptography.HMACSHA512(user.PasswordSalt);
+			if (user.PasswordHash == hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password))) {
+				return new ServiceResponse<bool>
+				{
+					Data = true,
+					Message = "success",
+					Success = true
+				};
+			}
+            else return new ServiceResponse<bool>
+			{
+				Data = false,
+				Message = "Wrong password",
+				Success = false
+			};
+		}
+
         public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             // using statement to dispose of IDisposable objects
@@ -190,7 +216,6 @@ namespace OchronaDanychAPI.Services.AuthService
             lettersHash = hashList.ToArray();
             lettersSalt = saltList.ToArray();
         }
-
 
         public async Task<bool> UserExists(string email)
         {

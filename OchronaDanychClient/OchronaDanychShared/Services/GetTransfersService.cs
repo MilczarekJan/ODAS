@@ -9,7 +9,6 @@ namespace OchronaDanychShared.Services
     {
         private const string base_url = "https://localhost:7230/api/Transfer";
         //https://localhost:7230/api/Transfer?email=milczarekjanek%40gmail.com
-        private const string shoeslist_endpoint = "api/Shoe";
         private readonly HttpClient _httpClient;
 
         public GetTransfersService()
@@ -30,8 +29,8 @@ namespace OchronaDanychShared.Services
             bool success = responseObj.Value<bool>("success");
             if (success) //&& responseObj.Value<string>("data") != null
             {
-                var shoeData = responseObj["data"].ToObject<List<BankTransfer>>();
-                return shoeData;
+                var balanceData = responseObj["data"].ToObject<List<BankTransfer>>();
+                return balanceData;
             }
             else
             {

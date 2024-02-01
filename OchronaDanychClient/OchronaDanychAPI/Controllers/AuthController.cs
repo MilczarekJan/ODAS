@@ -19,10 +19,28 @@ namespace OchronaDanychAPI.Controllers
             this._authService = authService;
         }
 
-        [HttpGet("Secret"), Authorize]
-        public string SecretText()
+        [HttpGet("document"), Authorize]
+        public async Task<ActionResult<ServiceResponse<string>>> SecretText(string email)
         {
-            return "secret";
+            var response = await _authService.GetDocumentNumber(email);
+            if (!response.Success)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
+        }
+
+        [HttpGet("balance"), Authorize]
+        public async Task<ActionResult<ServiceResponse<string>>> Balance(string email) 
+        {
+            var response = await _authService.GetBalance(email);
+            if (!response.Success)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
         }
 
         [HttpPost("login")]
@@ -68,19 +86,15 @@ namespace OchronaDanychAPI.Controllers
             return Ok(response);
         }
 
-        /*
-        [HttpPut("changebalance")]
-        public async Task<ActionResult<ServiceResponse<string>>> ChangeBalance(string amount)
+        [HttpPost("check-password")]
+        public async Task<ActionResult<ServiceResponse<bool>>> CheckPassword(string email, [FromBody] string password)
         {
-            var email = User.FindFirstValue(ClaimTypes.Email);
-            var response = await _authService.ChangeBalance(email, amount);
+            var response = await _authService.CheckPassword(email, password);
             if (!response.Success)
             {
                 return BadRequest(response);
             }
-
             return Ok(response);
         }
-        */
     }
 }

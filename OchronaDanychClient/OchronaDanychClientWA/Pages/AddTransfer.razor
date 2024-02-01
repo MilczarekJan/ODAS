@@ -12,7 +12,7 @@
 <SfTextBox Placeholder='Title' Value="@transferTitle" @oninput="UpdateTransferTitle"></SfTextBox>
 <SfTextBox Placeholder='Recipient Email' Value="@recipientMail" @oninput="UpdateTransferRecipientMail"></SfTextBox>
 <SfTextBox Placeholder='Amount' Value="@transferAmount" @oninput="UpdateTransferAmount"></SfTextBox>
-<button class="btn btn-primary" @onclick="AddShoeFromApi">New Transfer</button>
+<button class="btn btn-primary" @onclick="AddTransferFromApi">New Transfer</button>
 <p>Transfer status: @transferNameToDisplay</p>
 
 @code {
@@ -37,7 +37,7 @@
 		transferAmount = args.Value.ToString();
 	}
 
-	public async Task AddShoeFromApi()
+	public async Task AddTransferFromApi()
 	{
 		var token = await LocalStorageService.GetItemAsStringAsync("authToken");
 		token = token.Replace("\"", "");

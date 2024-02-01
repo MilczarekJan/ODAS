@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using OchronaDanychShared.Auth;
 
 namespace OchronaDanychShared.Services
@@ -34,11 +36,39 @@ namespace OchronaDanychShared.Services
             return await result.Content.ReadFromJsonAsync<ServiceResponse<int>>();
         }
 
-        public async Task<ServiceResponse<bool>> ChangePassword(string newPassword)
+        public async Task<bool> ChangePassword(string token, string newPassword)
         {
-            var result = await _httpClient.PostAsJsonAsync("https://p05shopapiwindows.azurewebsites.net/api/auth/change-password/", newPassword);
-
-            return await result.Content.ReadFromJsonAsync<ServiceResponse<bool>>();
+            if (!_httpClient.DefaultRequestHeaders.Contains("Authorization"))
+            {
+                _httpClient.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", token));
+            }
+            var result = await _httpClient.PostAsJsonAsync("https://localhost:7230/api/Auth/change-password", newPassword);
+			var jsonResponse = await result.Content.ReadAsStringAsync();
+			var responseObj = JsonConvert.DeserializeObject<JObject>(jsonResponse);
+			bool success = responseObj.Value<bool>("success");
+            if (success)
+            {
+                return true;
+            }
+            else return false;
         }
+
+        public async Task<bool> CheckPassword(string token, string email, string password)
+        {
+            var uri = "https://localhost:7230/api/Auth/check-password" + "/" + "?email=" + email.Replace("@", "%40");
+            if (!_httpClient.DefaultRequestHeaders.Contains("Authorization"))
+            {
+                _httpClient.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", token));
+            }
+            var result = await _httpClient.PostAsJsonAsync(uri, password);
+			var jsonResponse = await result.Content.ReadAsStringAsync();
+			var responseObj = JsonConvert.DeserializeObject<JObject>(jsonResponse);
+			bool success = responseObj.Value<bool>("success");
+			if (success)
+			{
+				return true;
+			}
+			else return false;
+		}
     }
 }

@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "OchronaDanychClientWA",
   "resources": {
-    "hash": "sha256-g8z8dXA+sLeuqiunF+ilmaFlIn72s3O8rVOS42qaDsI=",
+    "hash": "sha256-XAVTl8SJvL/deOMz6+rjzOKlTn1jOzVQZsxMNV2KBxc=",
     "jsModuleNative": {
       "dotnet.native.8.0.1.59ws1rgtlv.js": "sha256-SGOlISx+3G4kkvpC9Uq3qoPGsnjxGmW61QBev0lyI5U="
     },
@@ -235,12 +235,12 @@
       "mscorlib.wasm": "sha256-EpWTfh4m/hEcXRFYMCR9YeYHwdUJgcm1laBaxWfq2S4=",
       "netstandard.wasm": "sha256-2kH24/YfHmU3B4eYRyRmiwebYROM4+B9eDWKvMnUdP8=",
       "System.Private.CoreLib.wasm": "sha256-CsySKiP7HYY1pS8LTDE60EkqiX5oHb3WoEZHDNd1yK0=",
-      "OchronaDanychShared.wasm": "sha256-nfw9rj4gzy8n0TD692d0gZIR2oCDBNIbXTw75nVwGmw=",
-      "OchronaDanychClientWA.wasm": "sha256-gbN2uz1UwzjfPZnEgsb83HPN4cIdbVhwu8VZjGf5NoI="
+      "OchronaDanychShared.wasm": "sha256-Ea6ImHuApYVpnXMHjqeP7y78lblD2q4INAKiBUazVT0=",
+      "OchronaDanychClientWA.wasm": "sha256-uYOROenOREPe3doyaS/QhvzhWXz2Bvze96QsTYZlLXc="
     },
     "pdb": {
-      "OchronaDanychShared.pdb": "sha256-KeeHWXUdROrtwxmHLyIg6PbMa5E4NmzNfkKVOYSE1Rw=",
-      "OchronaDanychClientWA.pdb": "sha256-YFPkWie5RCm4Ngr9YNCFxWXp7IxR9TOYio924cXaxNE="
+      "OchronaDanychShared.pdb": "sha256-BRX4ET5LKxpFACAFMU2FYujt6YP/+SQj4qOCUSDPH6Y=",
+      "OchronaDanychClientWA.pdb": "sha256-vrrLEwe3dYOOw9BObexMewywg2BzP/XgR2Fs9CnZ7fI="
     }
   },
   "cacheBootResources": true,

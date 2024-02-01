@@ -13,6 +13,9 @@ namespace OchronaDanychShared.Services
 
         Task<ServiceResponse<int>> Register(UserRegisterDTO userRegisterDTO);
 
-        Task<ServiceResponse<bool>> ChangePassword(string newPassword);
-    }
+        Task<bool> ChangePassword(string token, string newPassword);
+
+        Task<bool> CheckPassword(string token, string email, string password);
+
+	}
 }

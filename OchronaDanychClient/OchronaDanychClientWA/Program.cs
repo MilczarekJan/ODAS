@@ -22,6 +22,7 @@ builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 builder.Services.AddScoped<GetTransfersService>();
 builder.Services.AddScoped<AddTransferService>();
+builder.Services.AddScoped<GetBalanceService>();
 builder.Services.AddHttpClient<IAuthService, AuthService>(client => client.BaseAddress = uriBuilder.Uri);
 builder.Services.AddScoped<Random>();
 builder.Services.AddSyncfusionBlazor();
