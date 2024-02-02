@@ -13,63 +13,63 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = browser
 build_property.RootNamespace = OchronaDanychClientWA
 build_property.RootNamespace = OchronaDanychClientWA
-build_property.ProjectDir = C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychClientWA\
+build_property.ProjectDir = C:\Studia\Ochrona_Danych\Projekt_backup\ODAS\OchronaDanychClient\OchronaDanychClientWA\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = false
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychClientWA
+build_property.MSBuildProjectDirectory = C:\Studia\Ochrona_Danych\Projekt_backup\ODAS\OchronaDanychClient\OchronaDanychClientWA
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Studia/Ochrona_Danych/Projekt/OchronaDanychClient/OchronaDanychClientWA/App.razor]
+[C:/Studia/Ochrona_Danych/Projekt_backup/ODAS/OchronaDanychClient/OchronaDanychClientWA/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Studia/Ochrona_Danych/Projekt/OchronaDanychClient/OchronaDanychClientWA/Pages/AddTransfer.razor]
+[C:/Studia/Ochrona_Danych/Projekt_backup/ODAS/OchronaDanychClient/OchronaDanychClientWA/Pages/AddTransfer.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkVHJhbnNmZXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Studia/Ochrona_Danych/Projekt/OchronaDanychClient/OchronaDanychClientWA/Pages/ChangePassword.razor]
+[C:/Studia/Ochrona_Danych/Projekt_backup/ODAS/OchronaDanychClient/OchronaDanychClientWA/Pages/ChangePassword.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2hhbmdlUGFzc3dvcmQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Studia/Ochrona_Danych/Projekt/OchronaDanychClient/OchronaDanychClientWA/Pages/Counter.razor]
+[C:/Studia/Ochrona_Danych/Projekt_backup/ODAS/OchronaDanychClient/OchronaDanychClientWA/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Studia/Ochrona_Danych/Projekt/OchronaDanychClient/OchronaDanychClientWA/Pages/Documents.razor]
+[C:/Studia/Ochrona_Danych/Projekt_backup/ODAS/OchronaDanychClient/OchronaDanychClientWA/Pages/Documents.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9jdW1lbnRzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Studia/Ochrona_Danych/Projekt/OchronaDanychClient/OchronaDanychClientWA/Pages/Home.razor]
+[C:/Studia/Ochrona_Danych/Projekt_backup/ODAS/OchronaDanychClient/OchronaDanychClientWA/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Studia/Ochrona_Danych/Projekt/OchronaDanychClient/OchronaDanychClientWA/Pages/Login.razor]
+[C:/Studia/Ochrona_Danych/Projekt_backup/ODAS/OchronaDanychClient/OchronaDanychClientWA/Pages/Login.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Studia/Ochrona_Danych/Projekt/OchronaDanychClient/OchronaDanychClientWA/Pages/MainPage.razor]
+[C:/Studia/Ochrona_Danych/Projekt_backup/ODAS/OchronaDanychClient/OchronaDanychClientWA/Pages/MainPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFpblBhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Studia/Ochrona_Danych/Projekt/OchronaDanychClient/OchronaDanychClientWA/Pages/Transactions.razor]
+[C:/Studia/Ochrona_Danych/Projekt_backup/ODAS/OchronaDanychClient/OchronaDanychClientWA/Pages/Transactions.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJhbnNhY3Rpb25zLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Studia/Ochrona_Danych/Projekt/OchronaDanychClient/OchronaDanychClientWA/Pages/Weather.razor]
+[C:/Studia/Ochrona_Danych/Projekt_backup/ODAS/OchronaDanychClient/OchronaDanychClientWA/Pages/Weather.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcV2VhdGhlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Studia/Ochrona_Danych/Projekt/OchronaDanychClient/OchronaDanychClientWA/_Imports.razor]
+[C:/Studia/Ochrona_Danych/Projekt_backup/ODAS/OchronaDanychClient/OchronaDanychClientWA/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Studia/Ochrona_Danych/Projekt/OchronaDanychClient/OchronaDanychClientWA/Layout/MainLayout.razor]
+[C:/Studia/Ochrona_Danych/Projekt_backup/ODAS/OchronaDanychClient/OchronaDanychClientWA/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-ypfjvvao3q
 
-[C:/Studia/Ochrona_Danych/Projekt/OchronaDanychClient/OchronaDanychClientWA/Layout/NavMenu.razor]
+[C:/Studia/Ochrona_Danych/Projekt_backup/ODAS/OchronaDanychClient/OchronaDanychClientWA/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-hx8076xg07

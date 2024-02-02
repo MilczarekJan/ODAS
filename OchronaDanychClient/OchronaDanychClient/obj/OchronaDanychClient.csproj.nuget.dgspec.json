@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClient\\OchronaDanychClient.csproj": {}
+    "C:\\Studia\\Ochrona_Danych\\Projekt_backup\\ODAS\\OchronaDanychClient\\OchronaDanychClient\\OchronaDanychClient.csproj": {}
   },
   "projects": {
-    "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClient\\OchronaDanychClient.csproj": {
+    "C:\\Studia\\Ochrona_Danych\\Projekt_backup\\ODAS\\OchronaDanychClient\\OchronaDanychClient\\OchronaDanychClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClient\\OchronaDanychClient.csproj",
+        "projectUniqueName": "C:\\Studia\\Ochrona_Danych\\Projekt_backup\\ODAS\\OchronaDanychClient\\OchronaDanychClient\\OchronaDanychClient.csproj",
         "projectName": "OchronaDanychClient",
-        "projectPath": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClient\\OchronaDanychClient.csproj",
+        "projectPath": "C:\\Studia\\Ochrona_Danych\\Projekt_backup\\ODAS\\OchronaDanychClient\\OchronaDanychClient\\OchronaDanychClient.csproj",
         "packagesPath": "C:\\Users\\milcz\\.nuget\\packages\\",
-        "outputPath": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClient\\obj\\",
+        "outputPath": "C:\\Studia\\Ochrona_Danych\\Projekt_backup\\ODAS\\OchronaDanychClient\\OchronaDanychClient\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,8 +33,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychShared\\OchronaDanychShared.csproj": {
-                "projectPath": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychShared\\OchronaDanychShared.csproj"
+              "C:\\Studia\\Ochrona_Danych\\Projekt_backup\\ODAS\\OchronaDanychClient\\OchronaDanychShared\\OchronaDanychShared.csproj": {
+                "projectPath": "C:\\Studia\\Ochrona_Danych\\Projekt_backup\\ODAS\\OchronaDanychClient\\OchronaDanychShared\\OchronaDanychShared.csproj"
               }
             }
           }
@@ -97,14 +97,14 @@
         }
       }
     },
-    "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychShared\\OchronaDanychShared.csproj": {
+    "C:\\Studia\\Ochrona_Danych\\Projekt_backup\\ODAS\\OchronaDanychClient\\OchronaDanychShared\\OchronaDanychShared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychShared\\OchronaDanychShared.csproj",
+        "projectUniqueName": "C:\\Studia\\Ochrona_Danych\\Projekt_backup\\ODAS\\OchronaDanychClient\\OchronaDanychShared\\OchronaDanychShared.csproj",
         "projectName": "OchronaDanychShared",
-        "projectPath": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychShared\\OchronaDanychShared.csproj",
+        "projectPath": "C:\\Studia\\Ochrona_Danych\\Projekt_backup\\ODAS\\OchronaDanychClient\\OchronaDanychShared\\OchronaDanychShared.csproj",
         "packagesPath": "C:\\Users\\milcz\\.nuget\\packages\\",
-        "outputPath": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychShared\\obj\\",
+        "outputPath": "C:\\Studia\\Ochrona_Danych\\Projekt_backup\\ODAS\\OchronaDanychClient\\OchronaDanychShared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

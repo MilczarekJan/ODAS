@@ -20,9 +20,17 @@ namespace OchronaDanychAPI.Controllers
         }
 
         [HttpGet("document"), Authorize]
-        public async Task<ActionResult<ServiceResponse<string>>> Document(string email)
+        public async Task<ActionResult<ServiceResponse<string>>> Document()
         {
-            var response = await _authService.GetDocumentNumber(email);
+            var userEmailClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email); //Teraz pobierane z User.Claims
+
+            if (userEmailClaim == null)
+            {
+                return Unauthorized();
+            }
+
+            var authorizedEmail = userEmailClaim.Value;
+            var response = await _authService.GetDocumentNumber(authorizedEmail);
             if (!response.Success)
             {
                 return BadRequest(response);
@@ -32,9 +40,17 @@ namespace OchronaDanychAPI.Controllers
         }
 
         [HttpGet("balance"), Authorize]
-        public async Task<ActionResult<ServiceResponse<string>>> Balance(string email) 
+        public async Task<ActionResult<ServiceResponse<string>>> Balance() 
         {
-            var response = await _authService.GetBalance(email);
+            var userEmailClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email); //Teraz pobierane z User.Claims
+
+            if (userEmailClaim == null)
+            {
+                return Unauthorized();
+            }
+
+            var authorizedEmail = userEmailClaim.Value;
+            var response = await _authService.GetBalance(authorizedEmail);
             if (!response.Success)
             {
                 return BadRequest(response);
@@ -77,8 +93,15 @@ namespace OchronaDanychAPI.Controllers
         [HttpPost("change-password"), Authorize]
         public async Task<ActionResult<ServiceResponse<bool>>> ChangePassword([FromBody] string newPassword)
         {
-            var userId = User.FindFirstValue(ClaimTypes.Email);
-            var response = await _authService.ChangePassword(userId, newPassword);
+            var userEmailClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email); //Teraz pobierane z User.Claims
+
+            if (userEmailClaim == null)
+            {
+                return Unauthorized();
+            }
+
+            var authorizedEmail = userEmailClaim.Value;
+            var response = await _authService.ChangePassword(authorizedEmail, newPassword);
             if (!response.Success)
             {
                 return BadRequest(response);
@@ -86,10 +109,19 @@ namespace OchronaDanychAPI.Controllers
             return Ok(response);
         }
 
-        [HttpPost("check-password")]
-        public async Task<ActionResult<ServiceResponse<bool>>> CheckPassword(string email, [FromBody] string password)
+        [HttpPost("check-password"), Authorize]
+        public async Task<ActionResult<ServiceResponse<bool>>> CheckPassword([FromBody] string password)
         {
-            var response = await _authService.CheckPassword(email, password);
+            var userEmailClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email); //Teraz pobierane z User.Claims
+
+            if (userEmailClaim == null)
+            {
+                return Unauthorized();
+            }
+
+            var authorizedEmail = userEmailClaim.Value;
+            var response = await _authService.CheckPassword(authorizedEmail, password);
+
             if (!response.Success)
             {
                 return BadRequest(response);

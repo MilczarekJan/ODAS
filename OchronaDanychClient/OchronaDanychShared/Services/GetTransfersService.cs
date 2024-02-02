@@ -16,9 +16,9 @@ namespace OchronaDanychShared.Services
             _httpClient = new HttpClient();
         }
 
-        public async Task<List<BankTransfer>> GetTransfersFromApi(string token, string email)
+        public async Task<List<BankTransfer>> GetTransfersFromApi(string token)
         {
-            var uri = base_url + "/" + "?email=" + email.Replace("@", "%40");
+            var uri = base_url;
             if (!_httpClient.DefaultRequestHeaders.Contains("Authorization"))
             {
                 _httpClient.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", token));

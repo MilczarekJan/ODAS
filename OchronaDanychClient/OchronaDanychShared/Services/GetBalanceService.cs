@@ -12,7 +12,6 @@ namespace OchronaDanychShared.Services
     public class GetBalanceService
     {
         private const string base_url = "https://localhost:7230/api/Auth/balance";
-        //https://localhost:7230/api/Transfer?email=milczarekjanek%40gmail.com
         private readonly HttpClient _httpClient;
 
         public GetBalanceService()
@@ -20,9 +19,9 @@ namespace OchronaDanychShared.Services
             _httpClient = new HttpClient();
         }
 
-        public async Task<string> GetBalanceFromApi(string token, string email)
+        public async Task<string> GetBalanceFromApi(string token)
         {
-            var uri = base_url + "/" + "?email=" + email.Replace("@", "%40");
+            var uri = base_url;
             if (!_httpClient.DefaultRequestHeaders.Contains("Authorization"))
             {
                 _httpClient.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", token));

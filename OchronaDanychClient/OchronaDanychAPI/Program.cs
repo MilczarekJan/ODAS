@@ -21,7 +21,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-//builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<Ganss.Xss.IHtmlSanitizer, Ganss.Xss.HtmlSanitizer>();
 builder.Services.AddScoped<OchronaDanychAPI.Services.AuthService.IAuthService, OchronaDanychAPI.Services.AuthService.AuthService>();
 builder.Services.AddScoped<ITransferService, TransferService>();
 /*

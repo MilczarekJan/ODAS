@@ -46,38 +46,6 @@ namespace OchronaDanychAPI.Services.TransferService
 
         }
 
-        public async Task<ServiceResponse<List<BankTransfer>>> GetTransfersByMailAsync(string email) {
-            /*
-                         var transfers = await _dataContext.BankTransfers
-                .Where(t => t.Sender_Email.ToString() == email)
-                .ToListAsync();
-            var transfersReceived = await _dataContext.BankTransfers
-                .Where(t => t.Recipient_Email.ToString() == email).ToListAsync();
-            var allTransfers = transfers.Concat(transfersReceived).ToList();
-             */
-            var allTransfers = await _dataContext.BankTransfers.ToListAsync();
-            try
-            {
-                var response = new ServiceResponse<List<BankTransfer>>()
-                {
-                    Data = allTransfers,
-                    Message = "Ok",
-                    Success = true
-                };
-
-                return response;
-            }
-            catch (Exception)
-            {
-                return new ServiceResponse<List<BankTransfer>>()
-                {
-                    Data = null,
-                    Message = "Problem with database",
-                    Success = false
-                };
-            }
-        }
-
         public async Task<ServiceResponse<string>> CreateTransfer(BankTransferDTO transfer)
         {
             var sender = await _dataContext.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == transfer.Sender_Email.ToLower());

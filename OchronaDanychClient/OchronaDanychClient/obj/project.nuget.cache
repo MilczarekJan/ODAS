@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "o6EfSmJVTE0LDt5xS1wa/QfeUkO9iAAxZRzHqHKeaAiSg4yp1z1TtTYoJSAIA+DyEsY9nu4DY2iEUajIabFm8A==",
+  "dgSpecHash": "LQEIL4zxwF2LwrWF8haogjMn5zzDtlTyFLvPSSB9uH+7ApIq+d5XdpvFQ+PWNFqWZ/3WXxR50x3qVcham5VQMQ==",
   "success": true,
-  "projectFilePath": "C:\\Studia\\Ochrona_Danych\\Projekt\\OchronaDanychClient\\OchronaDanychClient\\OchronaDanychClient.csproj",
+  "projectFilePath": "C:\\Studia\\Ochrona_Danych\\Projekt_backup\\ODAS\\OchronaDanychClient\\OchronaDanychClient\\OchronaDanychClient.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\milcz\\.nuget\\packages\\blazored.localstorage\\4.4.0\\blazored.localstorage.4.4.0.nupkg.sha512",
     "C:\\Users\\milcz\\.nuget\\packages\\bogus\\35.4.0\\bogus.35.4.0.nupkg.sha512",

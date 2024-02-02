@@ -11,3 +11,16 @@ C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychShared\obj\Deb
 C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychShared\obj\Debug\net8.0\refint\OchronaDanychShared.dll
 C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychShared\obj\Debug\net8.0\OchronaDanychShared.pdb
 C:\Studia\Ochrona_Danych\Projekt\OchronaDanychClient\OchronaDanychShared\obj\Debug\net8.0\ref\OchronaDanychShared.dll
+C:\Studia\Ochrona_Danych\Projekt_backup\ODAS\OchronaDanychClient\OchronaDanychShared\bin\Debug\net8.0\OchronaDanychShared.deps.json
+C:\Studia\Ochrona_Danych\Projekt_backup\ODAS\OchronaDanychClient\OchronaDanychShared\bin\Debug\net8.0\OchronaDanychShared.dll
+C:\Studia\Ochrona_Danych\Projekt_backup\ODAS\OchronaDanychClient\OchronaDanychShared\bin\Debug\net8.0\OchronaDanychShared.pdb
+C:\Studia\Ochrona_Danych\Projekt_backup\ODAS\OchronaDanychClient\OchronaDanychShared\obj\Debug\net8.0\OchronaDanychShared.csproj.AssemblyReference.cache
+C:\Studia\Ochrona_Danych\Projekt_backup\ODAS\OchronaDanychClient\OchronaDanychShared\obj\Debug\net8.0\OchronaDanychShared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Studia\Ochrona_Danych\Projekt_backup\ODAS\OchronaDanychClient\OchronaDanychShared\obj\Debug\net8.0\OchronaDanychShared.AssemblyInfoInputs.cache
+C:\Studia\Ochrona_Danych\Projekt_backup\ODAS\OchronaDanychClient\OchronaDanychShared\obj\Debug\net8.0\OchronaDanychShared.AssemblyInfo.cs
+C:\Studia\Ochrona_Danych\Projekt_backup\ODAS\OchronaDanychClient\OchronaDanychShared\obj\Debug\net8.0\OchronaDanychShared.csproj.CoreCompileInputs.cache
+C:\Studia\Ochrona_Danych\Projekt_backup\ODAS\OchronaDanychClient\OchronaDanychShared\obj\Debug\net8.0\OchronaDanychShared.sourcelink.json
+C:\Studia\Ochrona_Danych\Projekt_backup\ODAS\OchronaDanychClient\OchronaDanychShared\obj\Debug\net8.0\OchronaDanychShared.dll
+C:\Studia\Ochrona_Danych\Projekt_backup\ODAS\OchronaDanychClient\OchronaDanychShared\obj\Debug\net8.0\refint\OchronaDanychShared.dll
+C:\Studia\Ochrona_Danych\Projekt_backup\ODAS\OchronaDanychClient\OchronaDanychShared\obj\Debug\net8.0\OchronaDanychShared.pdb
+C:\Studia\Ochrona_Danych\Projekt_backup\ODAS\OchronaDanychClient\OchronaDanychShared\obj\Debug\net8.0\ref\OchronaDanychShared.dll

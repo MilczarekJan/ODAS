@@ -53,9 +53,9 @@ namespace OchronaDanychShared.Services
             else return false;
         }
 
-        public async Task<bool> CheckPassword(string token, string email, string password)
+        public async Task<bool> CheckPassword(string token, string password)
         {
-            var uri = "https://localhost:7230/api/Auth/check-password" + "/" + "?email=" + email.Replace("@", "%40");
+            var uri = "https://localhost:7230/api/Auth/check-password";
             if (!_httpClient.DefaultRequestHeaders.Contains("Authorization"))
             {
                 _httpClient.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", token));

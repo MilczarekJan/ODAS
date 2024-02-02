@@ -5,6 +5,7 @@ using OchronaDanychShared;
 using OchronaDanychShared.Models;
 using OchronaDanychAPI.Services.TransferService;
 using OchronaDanychShared.Auth;
+using System.Security.Claims;
 
 namespace OchronaDanychAPI.Controllers
 {
@@ -25,10 +26,17 @@ namespace OchronaDanychAPI.Controllers
         }
 
         [HttpGet, Authorize]
-        public async Task<ActionResult<ServiceResponse<List<BankTransfer>>>> GetBankTransfers(string email)
+        public async Task<ActionResult<ServiceResponse<List<BankTransfer>>>> GetBankTransfers()
         {
+            var userEmailClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email); //Teraz pobierane z User.Claims
 
-            var result = await _transferService.GetTransfersAsync(email);
+            if (userEmailClaim == null)
+            {
+                return Unauthorized();
+            }
+
+            var authorizedEmail = userEmailClaim.Value;
+            var result = await _transferService.GetTransfersAsync(authorizedEmail);
 
             if (result.Success)
                 return Ok(result);
@@ -36,9 +44,22 @@ namespace OchronaDanychAPI.Controllers
                 return StatusCode(500, $"Internal server error {result.Message}");
         }
 
+
         [HttpPost("createTransfer")]
         public async Task<ActionResult<ServiceResponse<int>>> CreateTransfer([FromBody] BankTransferDTO transfer)
         {
+            var userEmailClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email); //Tak samo jak powy¿ej
+
+            if (userEmailClaim == null)
+            {
+                return Unauthorized();
+            }
+
+            var authorizedEmail = userEmailClaim.Value;
+            if (authorizedEmail != transfer.Sender_Email) {
+                return Forbid();
+            }
+            
             var response = await _transferService.CreateTransfer(transfer);
             if (!response.Success)
             {
