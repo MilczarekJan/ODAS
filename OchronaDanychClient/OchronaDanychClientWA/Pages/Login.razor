@@ -66,24 +66,10 @@
         // Disable the button
         isButtonDisabled = true;
 
-        if (loginAttempts >= 5 && (DateTime.Now - lastLoginAttemptTime).TotalMinutes < 5)
-        {
-            // User has exceeded login attempts, and 5 minutes haven't passed
-            message = "Too many failed login attempts. Please wait 5 minutes before trying again.";
-
-            // Re-enable the button
-            isButtonDisabled = false;
-
-            return;
-        }
-
         if (char_0 == "" || char_1 == "" || char_2 == "" || char_3 == "" || char_4 == "" || mail == "")
         {
             message = "Login unsuccessful";
-
-            // Re-enable the button
             isButtonDisabled = false;
-
             return;
         }
 
@@ -104,22 +90,12 @@
         {
             await LocalStorageService.SetItemAsync("authToken", result.Data);
             await AuthenticationStateProvider.GetAuthenticationStateAsync();
-
             NavigationManager.NavigateTo("/");
         }
         else
         {
-            loginAttempts++;
-            lastLoginAttemptTime = DateTime.Now;
-
-            // Store values in local storage
-            await LocalStorageService.SetItemAsync("loginAttempts", loginAttempts);
-            await LocalStorageService.SetItemAsync("lastLoginAttemptTime", lastLoginAttemptTime);
-
-            message = "Login unsuccessful";
+            message = result.Message;
         }
-
-        // Re-enable the button
         isButtonDisabled = false;
     }
 }

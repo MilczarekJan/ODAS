@@ -14,6 +14,7 @@ namespace OchronaDanychAPI.Models
         }
         public DbSet<BankTransfer> BankTransfers { get; set; }
 		public DbSet<User> Users { get; set; }
+        public DbSet<LoginAttempt> LoginAttempts { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -49,6 +50,8 @@ namespace OchronaDanychAPI.Models
             modelBuilder.Entity<BankTransfer>().HasData(BankTransferSeeder.GenerateTransferData());
 
             modelBuilder.Entity<User>().HasKey(p => p.Email);
+
+            modelBuilder.Entity<LoginAttempt>().HasKey(p => p.UserEmail);
         }
     }
 }

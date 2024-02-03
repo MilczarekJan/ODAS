@@ -9,6 +9,7 @@ using OchronaDanychAPI.Models;
 using System.Security.Cryptography;
 using System.Security.Cryptography.Xml;
 using Ganss.Xss;
+using OchronaDanychShared.Models;
 
 namespace OchronaDanychAPI.Services.AuthService
 {
@@ -58,25 +59,45 @@ namespace OchronaDanychAPI.Services.AuthService
             email = SanitizeInput(email);
             var response = new ServiceResponse<string>();
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower());
+            var loginAttempt = _context.LoginAttempts.FirstOrDefault(x => x.UserEmail.ToLower() == email.ToLower());
+
+            if (loginAttempt.Attempts >= 5 && (DateTime.Now - loginAttempt.LastAttempt).TotalMinutes > 5)
+            {
+                loginAttempt.Attempts = 0;
+                loginAttempt.LastAttempt = DateTime.Now;
+            }
+            else if (loginAttempt.Attempts >= 5 && (DateTime.Now - loginAttempt.LastAttempt).TotalMinutes <= 5)
+            {
+                response.Success = false;
+                response.Message = "Too many failed attempts. Try again in 5 minutes.";
+                return response;
+            }
+
             if (user == null)
             {
                 response.Success = false;
                 response.Message = "User not found.";
+                return response;
             }
             else if (!VerifyPasswordHash(password, user.LettersHash, user.LettersSalt))
             {
                 response.Success = false;
                 response.Message = "Incorrect password.";
+                loginAttempt.Attempts++;
+                loginAttempt.LastAttempt = DateTime.Now;
+                await _context.SaveChangesAsync();
+                return response;
             }
             else
             {
                 response.Data = CreateToken(user);
                 response.Success = true;
                 response.Message = "Login successful.";
+                loginAttempt.Attempts = 0;
+                loginAttempt.LastAttempt = DateTime.Now;
+                await _context.SaveChangesAsync();
+                return response;
             }
-
-           
-            return response;
         }
 
         private bool VerifyPasswordHash(PasswordPair[] password, byte[] lettersHash, byte[] lettersSalt)
@@ -145,9 +166,13 @@ namespace OchronaDanychAPI.Services.AuthService
             user.DocumentIv = docIV;
             user.DocumentKey = docKey;
 
-            // add user to db
+            LoginAttempt userAttempts = new LoginAttempt();
+            userAttempts.UserEmail = user.Email;
+            userAttempts.Attempts = 0;
+            userAttempts.LastAttempt = DateTime.UtcNow;
+
             await _context.Users.AddAsync(user);
-            // save changes
+            await _context.LoginAttempts.AddAsync(userAttempts);
             await _context.SaveChangesAsync();
 
             return new ServiceResponse<string> { Success = true, Data = user.Email, Message = "Registration successful!" };
