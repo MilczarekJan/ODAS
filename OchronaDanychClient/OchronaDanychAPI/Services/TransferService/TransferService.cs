@@ -53,6 +53,7 @@ namespace OchronaDanychAPI.Services.TransferService
             transfer.Title = SanitizeInput(transfer.Title);
             transfer.Sender_Email = SanitizeInput(transfer.Sender_Email);
             transfer.Recipient_Email = SanitizeInput(transfer.Recipient_Email);
+
             var sender = await _dataContext.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == transfer.Sender_Email.ToLower());
             var recipient = await _dataContext.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == transfer.Recipient_Email.ToLower());
 
