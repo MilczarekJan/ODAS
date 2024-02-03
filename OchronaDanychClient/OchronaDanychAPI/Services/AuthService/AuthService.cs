@@ -8,6 +8,7 @@ using OchronaDanychShared.Auth;
 using OchronaDanychAPI.Models;
 using System.Security.Cryptography;
 using System.Security.Cryptography.Xml;
+using Ganss.Xss;
 
 namespace OchronaDanychAPI.Services.AuthService
 {
@@ -24,6 +25,8 @@ namespace OchronaDanychAPI.Services.AuthService
 
         public async Task<ServiceResponse<bool>> ChangePassword(string userMail, string newPassword)
         {
+            userMail = SanitizeInput(userMail);
+
             var user = await _context.Users.FindAsync(userMail);
             if (user == null)
             {
@@ -52,8 +55,8 @@ namespace OchronaDanychAPI.Services.AuthService
 
         public async Task<ServiceResponse<string>> Login(string email, PasswordPair[] password)
         {
+            email = SanitizeInput(email);
             var response = new ServiceResponse<string>();
-
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower());
             if (user == null)
             {
@@ -164,6 +167,7 @@ namespace OchronaDanychAPI.Services.AuthService
 
         public async Task<ServiceResponse<string>> GetBalance(string email)
         {
+            email = SanitizeInput(email);
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == email);
             return new ServiceResponse<string>
             {
@@ -175,6 +179,7 @@ namespace OchronaDanychAPI.Services.AuthService
 
         public async Task<ServiceResponse<bool>> CheckPassword(string email, string password) 
         {
+            email = SanitizeInput(email);
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == email);
 			var hmac = new System.Security.Cryptography.HMACSHA512(user.PasswordSalt);
             var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
@@ -307,5 +312,15 @@ namespace OchronaDanychAPI.Services.AuthService
 			}
 			return plaintext;
 		}
+
+        private string SanitizeInput(string input) {
+            HtmlSanitizerOptions options = new HtmlSanitizerOptions();
+            options.AllowedTags = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+            options.AllowedAttributes = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+            options.AllowedCssProperties = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+            HtmlSanitizer sanitizer = new HtmlSanitizer(options);
+            input = sanitizer.Sanitize(input);
+            return input;
+        }
 	}
 }

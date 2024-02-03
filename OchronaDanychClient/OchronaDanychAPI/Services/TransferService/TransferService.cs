@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Ganss.Xss;
+using Microsoft.EntityFrameworkCore;
 using OchronaDanychAPI.Models;
 using OchronaDanychShared;
 using OchronaDanychShared.Auth;
@@ -16,6 +17,7 @@ namespace OchronaDanychAPI.Services.TransferService
         }
         public async Task<ServiceResponse<List<BankTransfer>>> GetTransfersAsync(string email)
         {
+            email = SanitizeInput(email);
             var transfers = await _dataContext.BankTransfers
                 .Where(t => t.Sender_Email.ToString() == email)
                 .ToListAsync();
@@ -48,6 +50,9 @@ namespace OchronaDanychAPI.Services.TransferService
 
         public async Task<ServiceResponse<string>> CreateTransfer(BankTransferDTO transfer)
         {
+            transfer.Title = SanitizeInput(transfer.Title);
+            transfer.Sender_Email = SanitizeInput(transfer.Sender_Email);
+            transfer.Recipient_Email = SanitizeInput(transfer.Recipient_Email);
             var sender = await _dataContext.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == transfer.Sender_Email.ToLower());
             var recipient = await _dataContext.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == transfer.Recipient_Email.ToLower());
 
@@ -72,6 +77,16 @@ namespace OchronaDanychAPI.Services.TransferService
             _dataContext.Users.Update(recipient);
             await _dataContext.SaveChangesAsync();
             return new ServiceResponse<string> { Success = true, Data = transfer.Title, Message = "Transaction successful!" };
+        }
+        private string SanitizeInput(string input)
+        {
+            HtmlSanitizerOptions options = new HtmlSanitizerOptions();
+            options.AllowedTags = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+            options.AllowedAttributes = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+            options.AllowedCssProperties = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+            HtmlSanitizer sanitizer = new HtmlSanitizer(options);
+            input = sanitizer.Sanitize(input);
+            return input;
         }
     }
 }
