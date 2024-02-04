@@ -29,7 +29,9 @@ namespace OchronaDanychAPI.Services.AuthService
             userMail = SanitizeInput(userMail);
 
             var user = await _context.Users.FindAsync(userMail);
-            if (user == null)
+            var combination = await _context.Combinations.FindAsync(userMail);
+
+            if (user == null || combination == null)
             {
                   return new ServiceResponse<bool>
                   {
@@ -39,11 +41,27 @@ namespace OchronaDanychAPI.Services.AuthService
             }
 
             CreatePasswordHash(newPassword, out byte[] passwordHash, out byte[] passwordSalt);
-            CreateLettersHash(newPassword, out byte[] lettersHash, out byte[] lettersSalt);
+            CreateLettersHash(newPassword, out CombinationDTO combinations);
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
-            user.LettersHash = lettersHash;
-            user.LettersSalt = lettersSalt;
+            user.Combo1Hash = combinations.Combo1Hash;
+            user.Combo2Hash = combinations.Combo2Hash;
+            user.Combo3Hash = combinations.Combo3Hash;
+            user.Combo4Hash = combinations.Combo4Hash;
+            user.Combo5Hash = combinations.Combo5Hash;
+            user.Combo1Salt = combinations.Combo1Salt;
+            user.Combo2Salt = combinations.Combo2Salt;
+            user.Combo3Salt = combinations.Combo3Salt;
+            user.Combo4Salt = combinations.Combo4Salt;
+            user.Combo5Salt = combinations.Combo5Salt;
+
+            combination.Combo1 = combinations.Combo1;
+            combination.Combo2 = combinations.Combo2;
+            combination.Combo3 = combinations.Combo3;
+            combination.Combo4 = combinations.Combo4;
+            combination.Combo5 = combinations.Combo5;
+            combination.Email = user.Email;
+            combination.Choice = 1;
 
             await _context.SaveChangesAsync();
             return new ServiceResponse<bool>
@@ -54,17 +72,20 @@ namespace OchronaDanychAPI.Services.AuthService
             };
         }
 
-        public async Task<ServiceResponse<string>> Login(string email, PasswordPair[] password)
+        public async Task<ServiceResponse<string>> Login(string email, string password)
         {
             email = SanitizeInput(email);
             var response = new ServiceResponse<string>();
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower());
-            var loginAttempt = _context.LoginAttempts.FirstOrDefault(x => x.UserEmail.ToLower() == email.ToLower());
+            var loginAttempt = await _context.LoginAttempts.FirstOrDefaultAsync(x => x.UserEmail.ToLower() == email.ToLower());
+            var choice = await _context.Combinations.FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower());
 
-            if (loginAttempt.Attempts >= 5 && (DateTime.Now - loginAttempt.LastAttempt).TotalMinutes > 5)
+
+            if (user == null || loginAttempt == null || choice == null)
             {
-                loginAttempt.Attempts = 0;
-                loginAttempt.LastAttempt = DateTime.Now;
+                response.Success = false;
+                response.Message = "User not found.";
+                return response;
             }
             else if (loginAttempt.Attempts >= 5 && (DateTime.Now - loginAttempt.LastAttempt).TotalMinutes <= 5)
             {
@@ -73,13 +94,13 @@ namespace OchronaDanychAPI.Services.AuthService
                 return response;
             }
 
-            if (user == null)
+            if (loginAttempt.Attempts >= 5 && (DateTime.Now - loginAttempt.LastAttempt).TotalMinutes > 5)
             {
-                response.Success = false;
-                response.Message = "User not found.";
-                return response;
+                loginAttempt.Attempts = 0;
+                loginAttempt.LastAttempt = DateTime.Now;
             }
-            else if (!VerifyPasswordHash(password, user.LettersHash, user.LettersSalt))
+
+            if (!VerifyPasswordHash(user, password, choice.Choice))
             {
                 response.Success = false;
                 response.Message = "Incorrect password.";
@@ -100,21 +121,29 @@ namespace OchronaDanychAPI.Services.AuthService
             }
         }
 
-        private bool VerifyPasswordHash(PasswordPair[] password, byte[] lettersHash, byte[] lettersSalt)
+        private bool VerifyPasswordHash(User user, string password, int choice)
         {
-            foreach( var pair in password)
+            var hmac = new System.Security.Cryptography.HMACSHA512();
+            switch (choice) 
             {
-                byte[] hashPart = new byte[64];
-                byte[] saltPart = new byte[128];
-                Array.Copy(lettersHash, pair.Order * 64,hashPart, 0, 64);
-                Array.Copy(lettersSalt, pair.Order * 128, saltPart, 0, 128);
-                var hmac = new System.Security.Cryptography.HMACSHA512(saltPart);
-                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(pair.Letter.ToString()));
-                if (!computedHash.SequenceEqual(hashPart)) { 
+                case 1:
+                    hmac = new System.Security.Cryptography.HMACSHA512(user.Combo1Salt);
+                    return hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)).SequenceEqual(user.Combo1Hash);
+                case 2:
+                    hmac = new System.Security.Cryptography.HMACSHA512(user.Combo2Salt);
+                    return hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)) == user.Combo2Hash;
+                case 3:
+                    hmac = new System.Security.Cryptography.HMACSHA512(user.Combo3Salt);
+                    return hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)) == user.Combo3Hash;
+                case 4:
+                    hmac = new System.Security.Cryptography.HMACSHA512(user.Combo4Salt);
+                    return hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)) == user.Combo4Hash;
+                case 5:
+                    hmac = new System.Security.Cryptography.HMACSHA512(user.Combo5Salt);
+                    return hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)) == user.Combo5Hash;
+                default:
                     return false;
-                }
             }
-            return true;
         }
 
         private string CreateToken(User user)
@@ -154,25 +183,43 @@ namespace OchronaDanychAPI.Services.AuthService
 
             // create password hash and salt
             CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
-            CreateLettersHash(password, out byte[] lettersHash, out byte[] lettersSalt);
+            CreateLettersHash(password, out CombinationDTO combinations);
             EncryptStringToBytes_Aes(documentNumber, out byte[] docKey, out byte[] docIV, out byte[] documentHash);
 
             // assign hash and salt to user
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
-            user.LettersHash = lettersHash;
-            user.LettersSalt = lettersSalt;
             user.DocumentNumber = documentHash;
             user.DocumentIv = docIV;
             user.DocumentKey = docKey;
+            user.Combo1Hash = combinations.Combo1Hash;
+            user.Combo2Hash = combinations.Combo2Hash;
+            user.Combo3Hash = combinations.Combo3Hash;
+            user.Combo4Hash = combinations.Combo4Hash;
+            user.Combo5Hash = combinations.Combo5Hash;
+            user.Combo1Salt = combinations.Combo1Salt;
+            user.Combo2Salt = combinations.Combo2Salt;
+            user.Combo3Salt = combinations.Combo3Salt;
+            user.Combo4Salt = combinations.Combo4Salt;
+            user.Combo5Salt = combinations.Combo5Salt;
 
             LoginAttempt userAttempts = new LoginAttempt();
             userAttempts.UserEmail = user.Email;
             userAttempts.Attempts = 0;
             userAttempts.LastAttempt = DateTime.UtcNow;
 
+            Combination combination = new Combination();
+            combination.Combo1 = combinations.Combo1;
+            combination.Combo2 = combinations.Combo2;
+            combination.Combo3 = combinations.Combo3;
+            combination.Combo4 = combinations.Combo4;
+            combination.Combo5 = combinations.Combo5;
+            combination.Email = user.Email;
+            combination.Choice = 1;
+
             await _context.Users.AddAsync(user);
             await _context.LoginAttempts.AddAsync(userAttempts);
+            await _context.Combinations.AddAsync(combination);
             await _context.SaveChangesAsync();
 
             return new ServiceResponse<string> { Success = true, Data = user.Email, Message = "Registration successful!" };
@@ -237,22 +284,74 @@ namespace OchronaDanychAPI.Services.AuthService
             }
         }
 
-        public void CreateLettersHash(string password, out byte[] lettersHash, out byte[] lettersSalt)
+        public void CreateLettersHash(string password, out CombinationDTO combinations)
         {
-            List<byte> hashList = new List<byte>();
-            List<byte> saltList = new List<byte>();
-            for (int i = 0; i < 8; i++)
+            combinations = new CombinationDTO();
+            string[] indices = new string[5];
+            string currentCombo;
+            int[] currentComboIndices = new int[5];
+            byte[][] hashes = new byte[5][];
+            byte[][] salts = new byte[5][];
+
+            for (int i = 0; i < 5; i++)
             {
-                using (var hmac = new System.Security.Cryptography.HMACSHA512())
+                currentCombo = GenerateRandomComboIndices(password.Length);
+                while (indices.Take(i).Contains(currentCombo))
                 {
-                    char letter = password[i];
-                    byte[] letterBytes = System.Text.Encoding.UTF8.GetBytes(letter.ToString());
-                    saltList.AddRange(hmac.Key);
-                    hashList.AddRange(hmac.ComputeHash(letterBytes));
+                    currentCombo = GenerateRandomComboIndices(password.Length);
                 }
+                indices[i] = currentCombo;
             }
-            lettersHash = hashList.ToArray();
-            lettersSalt = saltList.ToArray();
+
+            combinations.Combo1 = indices[0];
+            combinations.Combo2 = indices[1];
+            combinations.Combo3 = indices[2];
+            combinations.Combo4 = indices[3];
+            combinations.Combo5 = indices[4];
+
+            for (int i = 0; i < 5; i++)
+            {
+                currentComboIndices = indices[i].Split(',').Select(int.Parse).ToArray();
+                currentCombo = password[currentComboIndices[0]].ToString()
+                    + password[currentComboIndices[1]].ToString()
+                    + password[currentComboIndices[2]].ToString()
+                    + password[currentComboIndices[3]].ToString()
+                    + password[currentComboIndices[4]].ToString();
+                var hmac = new System.Security.Cryptography.HMACSHA512();
+                salts[i] = hmac.Key;
+                hashes[i] = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(currentCombo));
+            }
+            combinations.Combo1Hash = hashes[0];
+            combinations.Combo2Hash = hashes[1];
+            combinations.Combo3Hash = hashes[2];
+            combinations.Combo4Hash = hashes[3];
+            combinations.Combo5Hash = hashes[4];
+            combinations.Combo1Salt = salts[0];
+            combinations.Combo2Salt = salts[1];
+            combinations.Combo3Salt = salts[2];
+            combinations.Combo4Salt = salts[3];
+            combinations.Combo5Salt = salts[4];
+        }
+
+
+        private string GenerateRandomComboIndices(int passwordLength)
+        {
+            Random random = new Random();
+            int[] indices = new int[5];
+
+            for (int j = 0; j < 5; j++)
+            {
+                int index;
+                do
+                {
+                    index = random.Next(0, passwordLength);
+                } while (Array.IndexOf(indices, index) != -1);
+
+                indices[j] = index;
+            }
+
+            Array.Sort(indices);
+            return string.Join(",", indices);
         }
 
         public async Task<bool> UserExists(string email)
@@ -337,6 +436,53 @@ namespace OchronaDanychAPI.Services.AuthService
 			}
 			return plaintext;
 		}
+
+        public async Task<ServiceResponse<string>> CheckUser(string email) 
+        {
+            email = SanitizeInput(email);
+            var combo = await _context.Combinations.FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower());
+            string chosenCombo;
+            if (combo == null) 
+            {
+                return new ServiceResponse<string>
+                {
+                    Data = "User does not exist.",
+                    Message = "User does not exist.",
+                    Success = false
+                };
+            }
+            Random randomizer = new Random();
+            int choice = randomizer.Next(1, 6);
+            combo.Choice = choice;
+            await _context.SaveChangesAsync();
+            switch (choice) 
+            {
+                case 1:
+                    chosenCombo = combo.Combo1;
+                    break;
+                case 2:
+                    chosenCombo = combo.Combo2;
+                    break;
+                case 3:
+                    chosenCombo = combo.Combo3;
+                    break;
+                case 4:
+                    chosenCombo = combo.Combo4;
+                    break;
+                case 5:
+                    chosenCombo = combo.Combo5;
+                    break;
+                default:
+                    chosenCombo = "Randomizer error";
+                    break;
+            }
+            return new ServiceResponse<string>
+            {
+                Data = chosenCombo,
+                Message = "Balance accessed successfully.",
+                Success = true
+            };
+        }
 
         private string SanitizeInput(string input) {
             HtmlSanitizerOptions options = new HtmlSanitizerOptions();

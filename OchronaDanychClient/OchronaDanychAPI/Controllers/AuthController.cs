@@ -128,5 +128,17 @@ namespace OchronaDanychAPI.Controllers
             }
             return Ok(response);
         }
+
+        [HttpPost("check-user")]
+        public async Task<ActionResult<ServiceResponse<string>>> CheckUser([FromBody] string email) 
+        {
+            var response = await _authService.CheckUser(email);
+            if (!response.Success)
+            {
+                return BadRequest(response);
+            }
+            return Ok(response);
+        }
+
     }
 }

@@ -5,7 +5,7 @@ namespace OchronaDanychAPI.Services.AuthService
 {
     public interface IAuthService
     {
-        Task<ServiceResponse<string>> Login(string email, PasswordPair[] password);
+        Task<ServiceResponse<string>> Login(string email, string password);
 
         Task<ServiceResponse<string>> Register(User user, string password, string documentNumber);
 
@@ -18,5 +18,6 @@ namespace OchronaDanychAPI.Services.AuthService
         Task<ServiceResponse<string>> GetBalance(string email);
 
         Task<ServiceResponse<bool>> CheckPassword(string email, string password);
+        Task<ServiceResponse<string>> CheckUser(string email);
     }
 }

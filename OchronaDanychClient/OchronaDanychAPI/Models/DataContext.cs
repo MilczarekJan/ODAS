@@ -15,6 +15,7 @@ namespace OchronaDanychAPI.Models
         public DbSet<BankTransfer> BankTransfers { get; set; }
 		public DbSet<User> Users { get; set; }
         public DbSet<LoginAttempt> LoginAttempts { get; set; }
+        public DbSet<Combination> Combinations { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -52,6 +53,8 @@ namespace OchronaDanychAPI.Models
             modelBuilder.Entity<User>().HasKey(p => p.Email);
 
             modelBuilder.Entity<LoginAttempt>().HasKey(p => p.UserEmail);
+
+            modelBuilder.Entity<Combination>().HasKey(p => p.Email);
         }
     }
 }

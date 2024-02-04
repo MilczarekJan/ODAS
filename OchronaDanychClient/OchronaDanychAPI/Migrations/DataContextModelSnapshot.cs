@@ -30,6 +30,46 @@ namespace OchronaDanychAPI.Migrations
                     b.Property<double>("Balance")
                         .HasColumnType("float");
 
+                    b.Property<byte[]>("Combo1Hash")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("Combo1Salt")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("Combo2Hash")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("Combo2Salt")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("Combo3Hash")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("Combo3Salt")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("Combo4Hash")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("Combo4Salt")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("Combo5Hash")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("Combo5Salt")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<byte[]>("DocumentIv")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
@@ -39,14 +79,6 @@ namespace OchronaDanychAPI.Migrations
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("DocumentNumber")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<byte[]>("LettersHash")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<byte[]>("LettersSalt")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
@@ -191,6 +223,39 @@ namespace OchronaDanychAPI.Migrations
                             Sender_Email = "Anjali.OKon85@yahoo.com",
                             Title = "SAS Corporate systems Mountain"
                         });
+                });
+
+            modelBuilder.Entity("OchronaDanychShared.Models.Combination", b =>
+                {
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Choice")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Combo1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Combo2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Combo3")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Combo4")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Combo5")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Email");
+
+                    b.ToTable("Combinations");
                 });
 
             modelBuilder.Entity("OchronaDanychShared.Models.LoginAttempt", b =>

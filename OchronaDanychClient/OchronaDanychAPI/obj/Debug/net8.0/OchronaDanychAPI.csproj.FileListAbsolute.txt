@@ -297,3 +297,4 @@ C:\Studia\Ochrona_Danych\Projekt_backup\ODAS\OchronaDanychClient\OchronaDanychAP
 C:\Studia\Ochrona_Danych\Projekt_backup\ODAS\OchronaDanychClient\OchronaDanychAPI\bin\Debug\net8.0\AngleSharp.dll
 C:\Studia\Ochrona_Danych\Projekt_backup\ODAS\OchronaDanychClient\OchronaDanychAPI\bin\Debug\net8.0\AngleSharp.Css.dll
 C:\Studia\Ochrona_Danych\Projekt_backup\ODAS\OchronaDanychClient\OchronaDanychAPI\bin\Debug\net8.0\HtmlSanitizer.dll
+C:\Studia\Ochrona_Danych\Projekt_backup\ODAS\OchronaDanychClient\OchronaDanychAPI\bin\Debug\net8.0\OchronaDanychAPI.staticwebassets.runtime.json
