@@ -3,7 +3,7 @@
 @using OchronaDanychShared.Services;
 @using Blazored.LocalStorage;
 @using Microsoft.AspNetCore.Components.Authorization;
-@inject IAuthService AuthService;
+@inject IAuthService authService;
 @inject ILocalStorageService LocalStorageService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
@@ -50,11 +50,43 @@
 
     private async Task HandleEmail()
     {
-        isButtonClicked = true; // Set this to true when the button is clicked
+        isButtonClicked = true;
+        Thread.Sleep(3000);
+        var userExists = await authService.CheckUser(mail);
+        if (userExists == "No user")
+        {
+            message = "User does not exist";
+            return;
+        }
+        else letters = userExists;
     }
 
     private async Task HandleLogin()
     {
-        isButtonClicked = true; // Set this to true when the button is clicked
+        isButtonClicked = true;
+        Thread.Sleep(3000);
+        if (char_0 == null || char_1 == null || char_2 == null || char_3 == null || char_4 == null)
+        {
+            message = "Wrong password";
+            return;
+        }
+        string password = char_0[0].ToString() + char_1[0].ToString()
+        + char_2[0].ToString() + char_3[0].ToString() + char_4[0].ToString();
+        UserLoginDTO userLoginDTO = new UserLoginDTO(password);
+        userLoginDTO.Email = mail;
+        var result = await authService.Login(userLoginDTO);
+
+        if (result.Success)
+        {
+            await LocalStorageService.SetItemAsync("authToken", result.Data);
+            await AuthenticationStateProvider.GetAuthenticationStateAsync();
+
+            NavigationManager.NavigateTo("/");
+        }
+        else
+        {
+            message = result.Message;
+            return;
+        }
     }
 }

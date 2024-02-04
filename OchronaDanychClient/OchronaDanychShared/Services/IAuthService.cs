@@ -16,6 +16,6 @@ namespace OchronaDanychShared.Services
         Task<bool> ChangePassword(string token, string newPassword);
 
         Task<bool> CheckPassword(string token, string password);
-
-	}
+        Task<string> CheckUser(string email);
+    }
 }

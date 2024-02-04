@@ -70,5 +70,19 @@ namespace OchronaDanychShared.Services
 			}
 			else return false;
 		}
+
+        public async Task<string> CheckUser(string email)
+        {
+            var uri = "https://localhost:7230/api/Auth/check-user";
+            var result = await _httpClient.PostAsJsonAsync(uri, email);
+            var jsonResponse = await result.Content.ReadAsStringAsync();
+            var responseObj = JsonConvert.DeserializeObject<JObject>(jsonResponse);
+            bool success = responseObj.Value<bool>("success");
+            if (success)
+            {
+                return responseObj.Value<string>("data");
+            }
+            else return "No user";
+        }
     }
 }

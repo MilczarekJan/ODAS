@@ -131,16 +131,16 @@ namespace OchronaDanychAPI.Services.AuthService
                     return hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)).SequenceEqual(user.Combo1Hash);
                 case 2:
                     hmac = new System.Security.Cryptography.HMACSHA512(user.Combo2Salt);
-                    return hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)) == user.Combo2Hash;
+                    return hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)).SequenceEqual(user.Combo2Hash);
                 case 3:
                     hmac = new System.Security.Cryptography.HMACSHA512(user.Combo3Salt);
-                    return hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)) == user.Combo3Hash;
+                    return hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)).SequenceEqual(user.Combo3Hash);
                 case 4:
                     hmac = new System.Security.Cryptography.HMACSHA512(user.Combo4Salt);
-                    return hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)) == user.Combo4Hash;
+                    return hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)).SequenceEqual(user.Combo4Hash);
                 case 5:
                     hmac = new System.Security.Cryptography.HMACSHA512(user.Combo5Salt);
-                    return hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)) == user.Combo5Hash;
+                    return hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)).SequenceEqual(user.Combo5Hash);
                 default:
                     return false;
             }
@@ -479,7 +479,7 @@ namespace OchronaDanychAPI.Services.AuthService
             return new ServiceResponse<string>
             {
                 Data = chosenCombo,
-                Message = "Balance accessed successfully.",
+                Message = "User exists.",
                 Success = true
             };
         }
