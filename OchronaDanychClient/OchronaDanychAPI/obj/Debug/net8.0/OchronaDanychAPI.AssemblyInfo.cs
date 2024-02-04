@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OchronaDanychAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f506f03e9e4e8fd3eb55fe4313d3554e528cef92")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+02a7cc008cf5b1726a2838923f0ec0775bc6381a")]
 [assembly: System.Reflection.AssemblyProductAttribute("OchronaDanychAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OchronaDanychAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

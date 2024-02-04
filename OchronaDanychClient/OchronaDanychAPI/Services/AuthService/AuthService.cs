@@ -476,6 +476,7 @@ namespace OchronaDanychAPI.Services.AuthService
                     chosenCombo = "Randomizer error";
                     break;
             }
+            chosenCombo = IncrementNumbers(chosenCombo);
             return new ServiceResponse<string>
             {
                 Data = chosenCombo,
@@ -493,5 +494,12 @@ namespace OchronaDanychAPI.Services.AuthService
             input = sanitizer.Sanitize(input);
             return input;
         }
-	}
+        private string IncrementNumbers(string input)
+        {
+            string[] numbers = input.Split(',');
+            var incrementedNumbers = numbers.Select(num => (int.Parse(num) + 1).ToString());
+            string result = string.Join(",", incrementedNumbers);
+            return result;
+        }
+    }
 }
