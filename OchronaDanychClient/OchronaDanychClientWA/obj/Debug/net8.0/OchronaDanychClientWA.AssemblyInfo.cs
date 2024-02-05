@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OchronaDanychClientWA")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+02a7cc008cf5b1726a2838923f0ec0775bc6381a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a6a8bc2c42e45e846e5a42b934cb0fe11eae22ab")]
 [assembly: System.Reflection.AssemblyProductAttribute("OchronaDanychClientWA")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OchronaDanychClientWA")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

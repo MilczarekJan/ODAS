@@ -54,16 +54,21 @@ namespace OchronaDanychAPI.Services.TransferService
             transfer.Sender_Email = SanitizeInput(transfer.Sender_Email);
             transfer.Recipient_Email = SanitizeInput(transfer.Recipient_Email);
 
+            if (transfer.Sender_Email == transfer.Recipient_Email) 
+            {
+                return new ServiceResponse<string> { Success = false, Data = null, Message = "Wrong recipient email" };
+            }
+
             var sender = await _dataContext.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == transfer.Sender_Email.ToLower());
             var recipient = await _dataContext.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == transfer.Recipient_Email.ToLower());
 
             if (sender == null || recipient == null) {
-                return new ServiceResponse<string> { Success = false, Data = transfer.Title, Message = "Wrong transaction" };
+                return new ServiceResponse<string> { Success = false, Data = null, Message = "Wrong transaction" };
             }
 
             if (sender.Balance < transfer.Amount || transfer.Amount <= 0)
             {
-                return new ServiceResponse<string> { Success = false, Data = transfer.Title, Message = "Not enough funds" };
+                return new ServiceResponse<string> { Success = false, Data = null, Message = "Not enough funds" };
             }
 
             if (transfer.Recipient_Name == "USER") {
@@ -77,7 +82,7 @@ namespace OchronaDanychAPI.Services.TransferService
             _dataContext.Users.Update(sender);
             _dataContext.Users.Update(recipient);
             await _dataContext.SaveChangesAsync();
-            return new ServiceResponse<string> { Success = true, Data = transfer.Title, Message = "Transaction successful!" };
+            return new ServiceResponse<string> { Success = true, Data = null, Message = "Transaction successful!" };
         }
         private string SanitizeInput(string input)
         {

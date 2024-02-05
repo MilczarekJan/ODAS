@@ -227,7 +227,8 @@ namespace OchronaDanychAPI.Services.AuthService
         }
 
         public async Task<ServiceResponse<string>> GetDocumentNumber(string email) {
-			var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == email);
+            email = SanitizeInput(email);
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == email);
             string document = DecryptStringFromBytes_Aes(user.DocumentNumber, user.DocumentKey, user.DocumentIv);
 			return new ServiceResponse<string>
 			{

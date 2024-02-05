@@ -18,6 +18,7 @@ namespace OchronaDanychAPI.Services.AuthService
         Task<ServiceResponse<string>> GetBalance(string email);
 
         Task<ServiceResponse<bool>> CheckPassword(string email, string password);
+
         Task<ServiceResponse<string>> CheckUser(string email);
     }
 }
