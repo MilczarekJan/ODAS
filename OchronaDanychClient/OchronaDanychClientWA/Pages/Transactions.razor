@@ -20,12 +20,12 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var shoe in transfersList)
+            @foreach (var transfer in transfersList)
             {
                 <tr>
-                    <td>@shoe.Title</td>
-                    <td>@shoe.Amount</td>
-                    <td>@shoe.Recipient_Name</td>
+                    <td>@transfer.Title</td>
+                    <td>@transfer.Amount</td>
+                    <td>@transfer.Recipient_Name</td>
                 </tr>
             }
         </tbody>
